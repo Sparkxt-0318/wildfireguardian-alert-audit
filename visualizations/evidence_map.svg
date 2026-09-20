@@ -1,46 +1,54 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="940" height="556" viewBox="0 0 940 556" font-family="Helvetica,Arial,sans-serif">
-<rect width="940" height="556" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="624" viewBox="0 0 940 624" font-family="Helvetica,Arial,sans-serif">
+<rect width="940" height="624" fill="#ffffff"/>
 <text x="24" y="38" font-size="19" font-weight="700" fill="#1a1a1a">Evidence map: what can and cannot be established</text>
 <text x="24" y="60" font-size="13" fill="#5c5c5c">March 2025 Gyeongbuk wildfires — by quantity, as of 2026-09-20</text>
 <text x="24" y="82" font-size="12" fill="#5c5c5c">Orange is not absence. It marks data that exists behind a credential this audit did not hold.</text>
-<text x="24" y="104" font-size="11.5" fill="#5c5c5c">A warning lead time needs one green row on the alert side and one on the reference side, at compatible geography. There is none.</text>
-<text x="236" y="142" font-size="12.5" fill="#1a1a1a" text-anchor="end">first sensor detection</text>
+<text x="24" y="104" font-size="11.5" fill="#5c5c5c">The alert side is green and exact. The arrival side is grey and always will be — which is why no warning lead time is reported.</text>
+<text x="236" y="142" font-size="12.5" fill="#1a1a1a" text-anchor="end">emergency alert send time</text>
 <rect x="250" y="126" width="250" height="22" fill="#1b5e20" rx="3"/>
 <text x="375" y="141" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">AVAILABLE</text>
-<text x="516" y="141" font-size="11.5" fill="#5c5c5c">REMOTE_SENSING — GK2A FF slots retrieved</text>
-<text x="236" y="176" font-size="12.5" fill="#1a1a1a" text-anchor="end">observation availability</text>
+<text x="516" y="141" font-size="11.5" fill="#5c5c5c">PRIMARY_OPERATIONAL — 1,688 records, second resolution</text>
+<text x="236" y="176" font-size="12.5" fill="#1a1a1a" text-anchor="end">evacuation order</text>
 <rect x="250" y="160" width="250" height="22" fill="#1b5e20" rx="3"/>
 <text x="375" y="175" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">AVAILABLE</text>
-<text x="516" y="175" font-size="11.5" fill="#5c5c5c">REMOTE_SENSING — 635/650 slots</text>
-<text x="236" y="210" font-size="12.5" fill="#1a1a1a" text-anchor="end">VIIRS/MODIS detection</text>
-<rect x="250" y="194" width="250" height="22" fill="#e65100" rx="3"/>
-<text x="375" y="209" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">CREDENTIAL</text>
-<text x="516" y="209" font-size="11.5" fill="#5c5c5c">REMOTE_SENSING — FIRMS_MAP_KEY</text>
-<text x="236" y="244" font-size="12.5" fill="#1a1a1a" text-anchor="end">first public warning</text>
-<rect x="250" y="228" width="250" height="22" fill="#e65100" rx="3"/>
-<text x="375" y="243" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">CREDENTIAL</text>
-<text x="516" y="243" font-size="11.5" fill="#5c5c5c">PRIMARY_OPERATIONAL — SAFETYDATA_API_KEY</text>
-<text x="236" y="278" font-size="12.5" fill="#1a1a1a" text-anchor="end">evacuation order</text>
+<text x="516" y="175" font-size="11.5" fill="#5c5c5c">PRIMARY_OPERATIONAL — 153 formal 대피명령</text>
+<text x="236" y="210" font-size="12.5" fill="#1a1a1a" text-anchor="end">observation availability</text>
+<rect x="250" y="194" width="250" height="22" fill="#1b5e20" rx="3"/>
+<text x="375" y="209" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">AVAILABLE</text>
+<text x="516" y="209" font-size="11.5" fill="#5c5c5c">REMOTE_SENSING — 635/650 GK2A slots</text>
+<text x="236" y="244" font-size="12.5" fill="#1a1a1a" text-anchor="end">reported ignition</text>
+<rect x="250" y="228" width="250" height="22" fill="#1b5e20" rx="3"/>
+<text x="375" y="243" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">AVAILABLE</text>
+<text x="516" y="243" font-size="11.5" fill="#5c5c5c">DERIVED — [11:24, 11:25] - two primary records disagree</text>
+<text x="236" y="278" font-size="12.5" fill="#1a1a1a" text-anchor="end">first sensor detection</text>
 <rect x="250" y="262" width="250" height="22" fill="#e65100" rx="3"/>
 <text x="375" y="277" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">CREDENTIAL</text>
-<text x="516" y="277" font-size="11.5" fill="#5c5c5c">PRIMARY_OPERATIONAL — alert record gated</text>
-<text x="236" y="312" font-size="12.5" fill="#1a1a1a" text-anchor="end">ignition</text>
-<rect x="250" y="296" width="250" height="22" fill="#5c5c5c" rx="3"/>
-<text x="375" y="311" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">UNOBSERVED</text>
-<text x="516" y="311" font-size="11.5" fill="#5c5c5c">PHYSICAL — not directly observed</text>
-<text x="236" y="346" font-size="12.5" fill="#1a1a1a" text-anchor="end">fire arrival</text>
-<rect x="250" y="330" width="250" height="22" fill="#5c5c5c" rx="3"/>
-<text x="375" y="345" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">UNOBSERVED</text>
-<text x="516" y="345" font-size="11.5" fill="#5c5c5c">PHYSICAL — no minute-scale truth</text>
-<text x="236" y="380" font-size="12.5" fill="#1a1a1a" text-anchor="end">road impact</text>
+<text x="516" y="277" font-size="11.5" fill="#5c5c5c">REMOTE_SENSING — FIRMS_MAP_KEY - free, by email</text>
+<text x="236" y="312" font-size="12.5" fill="#1a1a1a" text-anchor="end">GK2A fire pixels</text>
+<rect x="250" y="296" width="250" height="22" fill="#e65100" rx="3"/>
+<text x="375" y="311" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">CREDENTIAL</text>
+<text x="516" y="311" font-size="11.5" fill="#5c5c5c">REMOTE_SENSING — KMA_API_KEY for FF/DQF_FF NetCDF</text>
+<text x="236" y="346" font-size="12.5" fill="#1a1a1a" text-anchor="end">weather warning times</text>
+<rect x="250" y="330" width="250" height="22" fill="#e65100" rx="3"/>
+<text x="375" y="345" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">CREDENTIAL</text>
+<text x="516" y="345" font-size="11.5" fill="#5c5c5c">PRIMARY_OPERATIONAL — data.go.kr service key</text>
+<text x="236" y="380" font-size="12.5" fill="#1a1a1a" text-anchor="end">actual ignition</text>
 <rect x="250" y="364" width="250" height="22" fill="#5c5c5c" rx="3"/>
 <text x="375" y="379" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">UNOBSERVED</text>
-<text x="516" y="379" font-size="11.5" fill="#5c5c5c">PHYSICAL — no systematic record</text>
-<text x="236" y="414" font-size="12.5" fill="#1a1a1a" text-anchor="end">resident receipt</text>
+<text x="516" y="379" font-size="11.5" fill="#5c5c5c">PHYSICAL — reported by all, observed by none</text>
+<text x="236" y="414" font-size="12.5" fill="#1a1a1a" text-anchor="end">fire arrival</text>
 <rect x="250" y="398" width="250" height="22" fill="#5c5c5c" rx="3"/>
 <text x="375" y="413" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">UNOBSERVED</text>
-<text x="516" y="413" font-size="11.5" fill="#5c5c5c">PHYSICAL — not recorded anywhere</text>
-<rect x="24" y="447" width="14" height="14" fill="#1b5e20" rx="2"/><text x="46" y="458" font-size="11.5" fill="#1a1a1a">retrieved by this audit</text>
-<rect x="24" y="469" width="14" height="14" fill="#e65100" rx="2"/><text x="46" y="480" font-size="11.5" fill="#1a1a1a">exists, credential required — NOT absence</text>
-<rect x="24" y="491" width="14" height="14" fill="#5c5c5c" rx="2"/><text x="46" y="502" font-size="11.5" fill="#1a1a1a">not observed by any accessible source</text>
+<text x="516" y="413" font-size="11.5" fill="#5c5c5c">PHYSICAL — no per-locality arrival in the record</text>
+<text x="236" y="448" font-size="12.5" fill="#1a1a1a" text-anchor="end">road impact</text>
+<rect x="250" y="432" width="250" height="22" fill="#5c5c5c" rx="3"/>
+<text x="375" y="447" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">UNOBSERVED</text>
+<text x="516" y="447" font-size="11.5" fill="#5c5c5c">PHYSICAL — closure announcements, not arrival</text>
+<text x="236" y="482" font-size="12.5" fill="#1a1a1a" text-anchor="end">resident receipt</text>
+<rect x="250" y="466" width="250" height="22" fill="#5c5c5c" rx="3"/>
+<text x="375" y="481" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">UNOBSERVED</text>
+<text x="516" y="481" font-size="11.5" fill="#5c5c5c">PHYSICAL — CBS is one-way; no return path exists</text>
+<rect x="24" y="515" width="14" height="14" fill="#1b5e20" rx="2"/><text x="46" y="526" font-size="11.5" fill="#1a1a1a">retrieved by this audit</text>
+<rect x="24" y="537" width="14" height="14" fill="#e65100" rx="2"/><text x="46" y="548" font-size="11.5" fill="#1a1a1a">exists, credential required — NOT absence</text>
+<rect x="24" y="559" width="14" height="14" fill="#5c5c5c" rx="2"/><text x="46" y="570" font-size="11.5" fill="#1a1a1a">not observed by any accessible source</text>
 </svg>

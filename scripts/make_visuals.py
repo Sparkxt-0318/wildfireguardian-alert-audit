@@ -116,15 +116,28 @@ def build_timeline() -> str:
 def build_evidence_map() -> str:
     """Evidence availability by class and quantity. The gaps are the point."""
     rows = [
-        ("first sensor detection", "REMOTE_SENSING", "available", "GK2A FF slots retrieved"),
-        ("observation availability", "REMOTE_SENSING", "available", "635/650 slots"),
-        ("VIIRS/MODIS detection", "REMOTE_SENSING", "credential", "FIRMS_MAP_KEY"),
-        ("first public warning", "PRIMARY_OPERATIONAL", "credential", "SAFETYDATA_API_KEY"),
-        ("evacuation order", "PRIMARY_OPERATIONAL", "credential", "alert record gated"),
-        ("ignition", "PHYSICAL", "unobserved", "not directly observed"),
-        ("fire arrival", "PHYSICAL", "unobserved", "no minute-scale truth"),
-        ("road impact", "PHYSICAL", "unobserved", "no systematic record"),
-        ("resident receipt", "PHYSICAL", "unobserved", "not recorded anywhere"),
+        ("emergency alert send time", "PRIMARY_OPERATIONAL", "available",
+         "1,688 records, second resolution"),
+        ("evacuation order", "PRIMARY_OPERATIONAL", "available",
+         "153 formal 대피명령"),
+        ("observation availability", "REMOTE_SENSING", "available",
+         "635/650 GK2A slots"),
+        ("reported ignition", "DERIVED", "available",
+         "[11:24, 11:25] - two primary records disagree"),
+        ("first sensor detection", "REMOTE_SENSING", "credential",
+         "FIRMS_MAP_KEY - free, by email"),
+        ("GK2A fire pixels", "REMOTE_SENSING", "credential",
+         "KMA_API_KEY for FF/DQF_FF NetCDF"),
+        ("weather warning times", "PRIMARY_OPERATIONAL", "credential",
+         "data.go.kr service key"),
+        ("actual ignition", "PHYSICAL", "unobserved",
+         "reported by all, observed by none"),
+        ("fire arrival", "PHYSICAL", "unobserved",
+         "no per-locality arrival in the record"),
+        ("road impact", "PHYSICAL", "unobserved",
+         "closure announcements, not arrival"),
+        ("resident receipt", "PHYSICAL", "unobserved",
+         "CBS is one-way; no return path exists"),
     ]
     colours = {
         "available": AVAIL,
@@ -146,8 +159,8 @@ def build_evidence_map() -> str:
         'Orange is not absence. It marks data that exists behind a credential this '
         'audit did not hold.</text>',
         f'<text x="24" y="104" font-size="11.5" fill="{MUTED}">'
-        'A warning lead time needs one green row on the alert side and one on the '
-        'reference side, at compatible geography. There is none.</text>',
+        'The alert side is green and exact. The arrival side is grey and always '
+        'will be \u2014 which is why no warning lead time is reported.</text>',
     ]
 
     for i, (quantity, cls, state, note) in enumerate(rows):
