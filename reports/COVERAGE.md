@@ -81,6 +81,22 @@ correctly and the query was valid.
 
 **Outside that documented gap, availability was 100 % across 620 probed slots.**
 
+### Validity check: the retrieved products are distinct
+
+A measurement of "product availability" would be worthless if the endpoint
+served the same placeholder image at every URL. It does not:
+
+| Check | Result |
+|---|---|
+| Available slots with a recorded SHA-256 | 635 |
+| **Distinct image hashes** | **635** |
+| Most-repeated hash | appears once |
+| Byte sizes | 580,677 – 2,153,401, 633 distinct values |
+
+Every retrieved slot is byte-unique. Combined with the soft-404 test
+(content-type and length), this rules out both a static placeholder and an
+error page counted as a product.
+
 ### Transient failures were re-probed, not recorded
 
 Three slots (2025-03-25 05:30 UTC KO, 2025-03-25 11:00 UTC EA, 2025-03-29 04:00
