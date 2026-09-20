@@ -213,9 +213,26 @@ def cmd_timeline(args) -> int:
         print("timeline not built yet")
         return 1
     data = json.loads(p.read_text(encoding="utf-8"))
-    for e in data.get("events", []):
-        print(f"  {e['interval_kst']:<52} {e['quantity']:<24} {e['evidence_class']}")
-        print(f"    {e['geography']}  [{e['source_id']}]")
+    events = data.get("events", [])
+    if args.county:
+        events = [e for e in events if e.get("issuer_county") == args.county]
+    if args.orders_only:
+        events = [e for e in events if e.get("is_evacuation_order")]
+
+    for e in events[: args.limit]:
+        flag = "ORDER" if e.get("is_evacuation_order") else (
+            "directive" if e.get("is_evacuation_directive") else ""
+        )
+        where = e.get("issuer_county") or "-"
+        detail = " ".join(e.get("body_eup_myeon", [])) or ""
+        print(
+            f"  {e['send_time_kst'][:19]}  {where:<7} {e['quantity']:<22} {flag}"
+        )
+        if detail:
+            print(f"      localities: {detail}")
+        print(f"      {e['raw_text'][:96]}")
+        print(f"      [{e['source_id']}] {e['evidence_class']}")
+    print(f"\n  {len(events)} claims" + (f" (showing {args.limit})" if len(events) > args.limit else ""))
     return 0
 
 
@@ -273,7 +290,12 @@ def main(argv: list[str] | None = None) -> int:
     sub.add_parser("verify", help="re-hash the corpus").set_defaults(func=cmd_verify)
     sub.add_parser("gaps", help="show the evidence-gap registry").set_defaults(func=cmd_gaps)
     sub.add_parser("lead-time", help="show lead-time results").set_defaults(func=cmd_lead_time)
-    sub.add_parser("timeline", help="show the reconstructed timeline").set_defaults(func=cmd_timeline)
+    p = sub.add_parser("timeline", help="show the reconstructed timeline")
+    p.add_argument("--county", default=None, help="filter to one issuing county")
+    p.add_argument("--orders-only", action="store_true",
+                   help="only formally declared 대피명령")
+    p.add_argument("--limit", type=int, default=20)
+    p.set_defaults(func=cmd_timeline)
     sub.add_parser("ingest", help="alias of import for a directory").set_defaults(func=cmd_import)
     sub.add_parser("report", help="list generated reports").set_defaults(func=cmd_report)
 

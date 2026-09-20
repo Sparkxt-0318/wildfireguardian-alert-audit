@@ -109,28 +109,41 @@ treating a transport failure as a finding.
 
 ## Metric 2 — primary alert-record coverage
 
+> **This section reported 0 % in an earlier revision and was wrong.** It was
+> written before the harvest and never regenerated, so it stated that no alert
+> record had been obtained while `EVIDENCE_GAPS.md` and `LEAD_TIME_RESULTS.md`
+> both reported hundreds. An adversarial review caught the contradiction. The
+> stale text is replaced rather than hidden, and the episode is itself the
+> point: a report that is not regenerated from its data will drift away from it.
+
 ### Definition
 
 ```
-alert_record_coverage = (alert records retrieved for the target interval
-                         and province) / (alert records known to exist for it)
+alert_records_retrieved  = records obtained for the target window
+alert_records_in_scope   = those concerning the five complex counties
 ```
+
+A *rate* is deliberately **not** reported. The denominator — how many alert
+records exist for this window in the MOIS store — is unknown and is not
+estimated, because the authoritative API (`DSSP-IF-00247`) is credential-gated
+and cannot be enumerated from outside.
 
 ### Result
 
-**Numerator: 0. Denominator: unknown.**
+| Quantity | Value |
+|---|---|
+| Alert records harvested, 2025-03-21 → 2025-04-02 (nationwide) | **1,688** |
+| Claims derived, five complex counties | **299** |
+| Alerts classified as warnings about this fire | **212** directives, of which **153** formal 대피명령 |
+| Temporal resolution of the send time | **1 second** |
+| Denominator (records existing in the MOIS store) | **unknown, not estimated** |
 
-The denominator is genuinely unknown and is not estimated. The authoritative
-source (`DSSP-IF-00247`) is credential-gated, so this audit cannot enumerate
-what exists. The public 국민안전24 surface returns `전체 0 건` for the window,
-but that is a property of *that surface's retention*, not of the MOIS store.
-
-Reporting `0 / 0 = 0 %` or "no alerts were sent" would be exactly the error this
-repository exists to prevent. The correct statement is: **coverage of primary
-alert records is zero, and the size of what is missing is not knowable from
-outside the credential wall.**
-
----
+**What cannot be said.** That this is "complete" coverage. The harvest paged a
+public listing; it was not reconciled against the record-level API, and the
+listing's own 「전체 N 건」 total was parsed but never compared with the number
+of rows actually collected — so a silently truncated day would have looked
+identical to a complete one. That check has since been added
+(`adapters/alert_archive.py`), but the corpus in this repository predates it.
 
 ## Metric 3 — retrieved-corpus temporal coverage
 
@@ -150,12 +163,18 @@ not inflate coverage. Unbounded intervals are clipped to `T`.
 
 | Evidence class | Temporal coverage of T | Basis |
 |---|---|---|
-| `REMOTE_SENSING` | 15 of 15 days sampled; 100 % of probed slots outside the documented gap | GK2A L2 FF product tree |
-| `PRIMARY_OPERATIONAL` | **0 %** | no alert record obtained — credential-gated |
+| `REMOTE_SENSING` | not computed as a ratio — the sample is a systematic on-the-hour grid, not a measure of interval union | GK2A L2 FF product tree |
+| `PRIMARY_OPERATIONAL` | 1,688 records spanning the window; a *rate* is not computable (Metric 2) | public 재난문자 archive |
 | `OFFICIAL_RETROSPECTIVE` | see `reports/CURRENT_EVIDENCE_VERDICT.md` | — |
 | `NEWS_REPORT` | see `reports/CURRENT_EVIDENCE_VERDICT.md` | — |
 
-The asymmetry is the headline finding: **observation availability is
-well-established and alert timing is not established at all.** Since a warning
-lead time needs both sides, this asymmetry — not any analytical difficulty — is
-what determines the result in `reports/LEAD_TIME_RESULTS.md`.
+Metric 3 is reported as **not computed**. Neither row can honestly fill a cell
+defined as `|⋃ intervals(c) ∩ T| / |T|`: the alert corpus is a set of instants
+rather than intervals, and the GK2A sample is a systematic grid. Putting a
+different quantity in the cell would violate the very rule (C-6) this report
+exists to enforce.
+
+The finding that matters is the **asymmetry between sides**: alert timing is
+established to the second, and fire-arrival timing is not established at all.
+A warning lead time needs both. That asymmetry, not any analytical difficulty,
+is what determines the result in `reports/LEAD_TIME_RESULTS.md`.

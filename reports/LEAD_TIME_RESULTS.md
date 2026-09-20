@@ -44,7 +44,7 @@ measures. None of them is a warning lead time.
 | **reported ignition** | `[2025-03-22T11:24:00+09:00, 2025-03-22T11:25:59+09:00]` — evidence class **`DERIVED`**. Belongs specifically to the **안평면 괴산리** ignition; see the incident-identity caveat below. |
 | **formal evacuation order** | the alert text declares 대피명령 / 대피령 / 긴급대피 |
 | **evacuation directive** | the alert instructs people to evacuate, whether or not an order was formally declared. A superset of the above. |
-| **first alert about this fire** | earliest alert from that authority that mentions 산불 **and** was sent at or after the earliest reported ignition. The time floor matters: without it, each county's "first alert" is a pre-ignition dryness warning and the interval comes out negative. |
+| **first warning about this fire** | earliest alert from that authority whose **purpose** is to warn about an actually-burning fire — an evacuation order, an evacuation directive, or an incident warning. Classified by `core/korean.classify_alert_purpose`. Burn-ban advisories, road-closure notices and utility notices are excluded and recorded under their own purposes. **No ignition-time floor is applied** (see the correction note). |
 
 #### Why the reported-ignition interval is `DERIVED`, and why a hull is allowed
 
@@ -63,6 +63,39 @@ precision to the second that no record anywhere supplies.
 
 Consequence: every interval in the tables below inherits `DERIVED` status on
 its ignition side. The alert side remains `PRIMARY_OPERATIONAL` and exact.
+
+#### Correction note — these tables were wrong in an earlier revision
+
+An adversarial review found two errors here, both of which flattered the result.
+They are recorded rather than quietly patched.
+
+**1. The selection rule picked the wrong record for four counties out of five.**
+The first version selected "the earliest alert mentioning 산불, sent at or after
+the reported ignition". Every routine burn-ban SMS in Korea contains 산불, and so
+does a road-closure notice. What that rule actually selected:
+
+| County | Old "first alert" | What it really was |
+|---|---|---|
+| 안동시 | 13:07:13 | province-wide burn-ban boilerplate |
+| 청송군 | 13:39:21 | the same boilerplate, word for word |
+| 영양군 | 16:14:02 | the same boilerplate, word for word |
+| 영덕군 | 03-24 17:02 | an **expressway closure notice** — about 서산영덕선, the very road this repository's geography module exists to keep out of locality inference |
+
+The corrected figures are **later, not earlier**: 안동 moved from 1h41m to
+3h52m, 청송 from 2h13m to 77h23m, 영양 from 4h48m to 24h05m, 영덕 from 53h36m to
+78h56m. Every error ran in the direction that made each county look like it had
+warned sooner.
+
+**2. The published precision was wrong by a factor of sixty.** The intervals
+were described as "two seconds wide" and "±2 s". They are **119 seconds** wide.
+The error came from reading the *seconds field* of the two endpoints
+(`1h24m33s` … `1h26m32s`) as the width. A test now asserts the width is 119 s.
+
+**3. An ignition-time floor has been removed.** Filtering to alerts sent at or
+after the reported ignition made the metric *structurally incapable* of
+returning a negative value. If an authority had warned before the stated
+ignition minute, that would be a finding, not something to filter away. The
+purpose classifier does the work the floor was compensating for.
 
 #### Incident-identity caveat — the interval belongs to ONE of three fires
 
@@ -91,26 +124,29 @@ fire that reached us started".
 
 ### Result: reported ignition → first public warning
 
-| County | Alerts | Formal orders | Directives | First alert (KST) | Reported ignition → first alert |
-|---|---:|---:|---:|---|---|
-| 의성군 Uiseong | 66 | 58 | 57 | 2025-03-22 **12:50:32** | **[1h24m33s, 1h26m32s]** |
-| 안동시 Andong | 106 | 51 | 76 | 2025-03-22 **13:07:13** | **[1h41m14s, 1h43m13s]** |
-| 청송군 Cheongsong | 17 | 12 | 12 | 2025-03-22 **13:39:21** | **[2h13m22s, 2h15m21s]** |
-| 영양군 Yeongyang | 26 | 4 | 17 | 2025-03-22 **16:14:02** | **[4h48m03s, 4h50m02s]** |
-| 영덕군 Yeongdeok | 14 | 5 | 13 | 2025-03-24 **17:02:00** | **[53h36m01s, 53h38m00s]** |
+| County | Alerts about the fire | Formal orders | First warning (KST) | Reported ignition → first warning |
+|---|---:|---:|---|---|
+| 의성군 Uiseong | 71 | 66 | 2025-03-22 12:50:32 | **[1h24m33s, 1h26m32s]** |
+| 안동시 Andong | 94 | 54 | 2025-03-22 15:18:00 | **[3h52m01s, 3h54m00s]** |
+| 청송군 Cheongsong | 24 | 23 | 2025-03-25 16:49:19 | **[77h23m20s, 77h25m19s]** |
+| 영양군 Yeongyang | 19 | 4 | 2025-03-23 11:30:44 | **[24h04m45s, 24h06m44s]** |
+| 영덕군 Yeongdeok | 14 | 5 | 2025-03-25 18:21:50 | **[78h55m51s, 78h57m50s]** |
 
-Each interval is two seconds wide, and the width comes **entirely** from the
-11:24/11:25 disagreement between two primary records. The alert side is exact.
+Each interval is **119 seconds wide** (±1 minute). That width comes
+**entirely** from the 11:24/11:25 disagreement between two primary records
+(C-01); the alert side is exact to the second. The ignition side is not
+*uncertain*, it is **disputed** — two official records contradict each other —
+and a disputed value is not a confidence interval.
 
 ### Result: reported ignition → first formal evacuation order
 
-| County | First formal order (KST) | Reported ignition → first order | First alert → first order |
+| County | First formal order (KST) | Reported ignition → first order | First warning → first order |
 |---|---|---|---|
-| 의성군 | 2025-03-22 **12:50:32** | [1h24m33s, 1h26m32s] | 0h00m00s (the first alert *was* the order) |
-| 안동시 | 2025-03-22 **21:29:18** | [10h03m19s, 10h05m18s] | 8h22m05s |
-| 청송군 | 2025-03-25 **16:49:19** | [77h23m20s, 77h25m19s] | 75h09m58s |
-| 영양군 | 2025-03-25 **18:18:45** | [78h52m46s, 78h54m45s] | 74h04m43s |
-| 영덕군 | 2025-03-25 **18:58:23** | [79h32m24s, 79h34m23s] | 25h56m23s |
+| 의성군 Uiseong | 2025-03-22 12:50:32 | [1h24m33s, 1h26m32s] | 0h00m00s |
+| 안동시 Andong | 2025-03-22 21:29:18 | [10h03m19s, 10h05m18s] | 6h11m18s |
+| 청송군 Cheongsong | 2025-03-25 16:49:19 | [77h23m20s, 77h25m19s] | 0h00m00s |
+| 영양군 Yeongyang | 2025-03-25 18:18:45 | [78h52m46s, 78h54m45s] | 54h48m01s |
+| 영덕군 Yeongdeok | 2025-03-25 18:58:23 | [79h32m24s, 79h34m23s] | 0h36m33s |
 
 `first alert → first order` intervals are **exact**: both endpoints are
 second-resolution primary records, so no uncertainty enters.
@@ -194,9 +230,9 @@ solar zenith angle above 70° is flagged invalid rather than fire-free.
 | Warning lead time, any locality? | **No.** Not computable from accessible evidence. |
 | Alert → sensor detection lead? | Not yet — needs one free `FIRMS_MAP_KEY`. |
 | Alert → physical arrival lead? | **No, and no credential fixes it.** |
-| Reported ignition → first warning? | **Yes**, 5 counties, ±2 s. |
-| Reported ignition → first order? | **Yes**, 5 counties, ±2 s. |
-| First alert → first order? | **Yes**, 5 counties, exact. |
+| Reported ignition → first warning? | **Yes**, 5 counties, ±1 minute. |
+| Reported ignition → first order? | **Yes**, 5 counties, ±1 minute. |
+| First warning → first order? | **Yes**, 5 counties, exact to the second. |
 
 The audit produces no warning lead time, and that is the correct result rather
 than a shortfall. What it produces instead is a second-resolution record of when

@@ -212,7 +212,13 @@ class Quantity(str, Enum):
     REPORTED_IGNITION = "reported_ignition"
     FIRST_SENSOR_DETECTION = "first_sensor_detection"
     FIRST_OFFICIAL_AWARENESS = "first_official_awareness"
+    #: The earliest public warning about an incident for a given locality.
+    #: A superlative, so it may hold for at most one record per locality.
     FIRST_PUBLIC_WARNING = "first_public_warning"
+    #: Any subsequent public warning about the same incident. Added because
+    #: stamping every alert FIRST_PUBLIC_WARNING asserted the superlative
+    #: hundreds of times and drained the field of information.
+    PUBLIC_WARNING = "public_warning"
     FIRE_ARRIVAL = "fire_arrival"
     ROAD_IMPACT = "road_impact"
     EVACUATION_ORDER = "evacuation_order"

@@ -23,11 +23,24 @@ from wg_alert_audit.core import gazetteer as gz  # noqa: E402
 from wg_alert_audit.core.geography import extract  # noqa: E402
 from wg_alert_audit.core.intervals import KST, TimeInterval  # noqa: E402
 from wg_alert_audit.core.korean import (  # noqa: E402
+    AlertPurpose,
+    classify_alert_purpose,
     find_times,
     is_evacuation_directive,
     parse as parse_ko,
 )
 from wg_alert_audit.core.model import Quantity  # noqa: E402
+
+#: An alert's purpose determines its quantity. Stamping every record
+#: `first_public_warning` asserted a superlative 295 times across six days and
+#: made the field carry almost no information, so any downstream count or join
+#: keyed on it was operating on a constant.
+PURPOSE_TO_QUANTITY = {
+    AlertPurpose.EVACUATION_ORDER: Quantity.EVACUATION_ORDER,
+    AlertPurpose.EVACUATION_DIRECTIVE: Quantity.EVACUATION_ORDER,
+    AlertPurpose.INCIDENT_WARNING: Quantity.PUBLIC_WARNING,
+    AlertPurpose.ROAD_IMPACT: Quantity.ROAD_IMPACT,
+}
 
 ROOT = Path(__file__).resolve().parents[1]
 ALERTS = ROOT / "data" / "normalized" / "alerts_archive.jsonl"
@@ -112,6 +125,11 @@ def build() -> dict:
             "send_interval_kst": r["send_interval"],
             "issuing_authority": issuer,
             "issuer_county": ic,
+            # An issuer outside the Gyeongbuk gazetteer is recorded as such,
+            # rather than silently becoming None. 곡성군 (South Jeolla) issued
+            # advisories referencing the 의성 fire; dropping the issuer made
+            # those records look like they had no origin at all.
+            "issuer_out_of_scope": ic is None and bool(issuer.strip()),
             "body_counties": body_counties,
             "body_eup_myeon": eups,
             # Every road/facility token seen, whether or not it embedded a
@@ -138,11 +156,18 @@ def build() -> dict:
             ],
         }
 
-        # Claim 1: the alert was sent. Always true of every record.
+        # Claim 1: the alert was sent, under the quantity its purpose implies.
+        purpose = classify_alert_purpose(text)
+        quantity = PURPOSE_TO_QUANTITY.get(purpose)
+        if quantity is None:
+            # A fire-risk advisory or utility notice is a real record with a
+            # real send time, but it is not one of the modelled quantities.
+            quantity = None
         events.append(
             {
                 **base,
-                "quantity": Quantity.FIRST_PUBLIC_WARNING.value,
+                "alert_purpose": purpose.value,
+                "quantity": (quantity.value if quantity else "public_alert_other"),
                 "time_role": "ALERT_SEND_TIME",
                 "evidence_class": "PRIMARY_OPERATIONAL",
                 "interval_kst": r["send_interval"],
@@ -151,12 +176,33 @@ def build() -> dict:
                 # Superset: an imperative instruction to leave, whether or not
                 # a formal 대피명령 was declared.
                 "is_evacuation_directive": is_evacuation_directive(text),
+                "warns_about_an_incident": purpose.warns_about_an_incident,
             }
         )
 
         # Claim 2: where the text states an ignition time, record it as a
         # REPORTED ignition at the text's own resolution - never as an
         # observation, and never merged with the send time.
+        if Quantity.RE_IGNITION.value in quantities:
+            events.append(
+                {
+                    **base,
+                    "alert_purpose": purpose.value,
+                    "quantity": Quantity.RE_IGNITION.value,
+                    "time_role": "REPORT_TIME",
+                    "evidence_class": "PRIMARY_OPERATIONAL",
+                    "interval_kst": r["send_interval"],
+                    "labels": sorted(set(quantities)),
+                    "is_evacuation_order": Quantity.EVACUATION_ORDER.value
+                    in quantities,
+                    "is_evacuation_directive": is_evacuation_directive(text),
+                    "note": (
+                        "a re-ignition reported by an authority. Distinct from "
+                        "the initial ignition and never merged with it."
+                    ),
+                }
+            )
+
         states_ignition = (
             Quantity.REPORTED_IGNITION.value in quantities
             or Quantity.IGNITION.value in quantities
@@ -194,6 +240,26 @@ def build() -> dict:
                 )
 
     events.sort(key=lambda e: (e["send_time_kst"], e["quantity"]))
+
+    # Promote exactly one record per county to FIRST_PUBLIC_WARNING: the
+    # earliest whose purpose is to warn about an actually-burning fire. The
+    # superlative then holds at most once per locality, as a superlative should.
+    seen_first: set[str] = set()
+    for e in events:
+        county = e.get("issuer_county")
+        if (
+            county
+            and county not in seen_first
+            and e.get("warns_about_an_incident")
+            and e["quantity"] in (
+                Quantity.PUBLIC_WARNING.value,
+                Quantity.EVACUATION_ORDER.value,
+            )
+        ):
+            seen_first.add(county)
+            e["is_first_public_warning_for_county"] = True
+        else:
+            e["is_first_public_warning_for_county"] = False
     OUT.parent.mkdir(parents=True, exist_ok=True)
     doc = {
         "generated": datetime.now(timezone.utc).isoformat(),

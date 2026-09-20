@@ -2,8 +2,8 @@
   "counties": {
     "의성군": {
       "county": "의성군",
-      "alerts_issued": 66,
-      "evacuation_orders": 58,
+      "alerts_issued": 71,
+      "evacuation_orders": 66,
       "first_alert_kst": "2025-03-22T12:50:32+09:00",
       "first_alert_text": "(대피명령발령) 11:25 안평면 괴산리 산61 산불 확산. 인근 주민과 등산객은 안전한 곳(안평면 신월리 125 신동마을회관)으로 대피 바람 [의성군]",
       "first_alert_record_id": "231369",
@@ -54,8 +54,13 @@
         },
         {
           "from": "2025-03-24T13:17:36+09:00",
+          "to": "2025-03-24T13:24:22+09:00",
+          "gap": "0h06m46s"
+        },
+        {
+          "from": "2025-03-24T13:24:22+09:00",
           "to": "2025-03-24T13:42:24+09:00",
-          "gap": "0h24m48s"
+          "gap": "0h18m02s"
         },
         {
           "from": "2025-03-24T13:42:24+09:00",
@@ -69,8 +74,13 @@
         },
         {
           "from": "2025-03-24T14:30:43+09:00",
+          "to": "2025-03-24T14:34:35+09:00",
+          "gap": "0h03m52s"
+        },
+        {
+          "from": "2025-03-24T14:34:35+09:00",
           "to": "2025-03-24T14:37:31+09:00",
-          "gap": "0h06m48s"
+          "gap": "0h02m56s"
         },
         {
           "from": "2025-03-24T14:37:31+09:00",
@@ -79,8 +89,13 @@
         },
         {
           "from": "2025-03-24T14:45:38+09:00",
+          "to": "2025-03-24T14:47:29+09:00",
+          "gap": "0h01m51s"
+        },
+        {
+          "from": "2025-03-24T14:47:29+09:00",
           "to": "2025-03-24T14:55:27+09:00",
-          "gap": "0h09m49s"
+          "gap": "0h07m58s"
         },
         {
           "from": "2025-03-24T14:55:27+09:00",
@@ -216,37 +231,22 @@
           "from": "2025-03-25T16:17:57+09:00",
           "to": "2025-03-25T16:26:09+09:00",
           "gap": "0h08m12s"
-        },
-        {
-          "from": "2025-03-25T16:26:09+09:00",
-          "to": "2025-03-25T16:29:17+09:00",
-          "gap": "0h03m08s"
-        },
-        {
-          "from": "2025-03-25T16:29:17+09:00",
-          "to": "2025-03-25T16:30:53+09:00",
-          "gap": "0h01m36s"
-        },
-        {
-          "from": "2025-03-25T16:30:53+09:00",
-          "to": "2025-03-25T16:43:17+09:00",
-          "gap": "0h12m24s"
         }
       ]
     },
     "안동시": {
       "county": "안동시",
-      "alerts_issued": 106,
-      "evacuation_orders": 51,
-      "first_alert_kst": "2025-03-22T13:07:13+09:00",
-      "first_alert_text": "도내 산불이 많이 발생중이며 건조한 날씨와 바람으로 산불위험이 매우 높으니, 소각을 금지하여 주시고 산불이 발생하지 않도록 주의하여 주시기 바랍니다.[안동시]",
-      "first_alert_record_id": "231373",
+      "alerts_issued": 94,
+      "evacuation_orders": 54,
+      "first_alert_kst": "2025-03-22T15:18:00+09:00",
+      "first_alert_text": "금일 11:24 의성군 안평면 괴산리 산 61번지 일원 산불 발생하여 확산중. 입산 금지. 인근 주민과 등산객은 안전사고에 주의하시기 바랍니다.[안동시]",
+      "first_alert_record_id": "231410",
       "reported_ignition_to_first_alert": {
-        "interval": "[1h41m, 1h43m]",
-        "lower_seconds": 6074.0,
-        "upper_seconds": 6193.0,
-        "lower_h": "1h41m14s",
-        "upper_h": "1h43m13s",
+        "interval": "[3h52m, 3h54m]",
+        "lower_seconds": 13921.0,
+        "upper_seconds": 14040.0,
+        "lower_h": "3h52m01s",
+        "upper_h": "3h54m00s",
         "kind": "REPORTED_IGNITION -> FIRST_PUBLIC_WARNING by this authority",
         "caveat": "NOT a warning lead time. It measures the gap between an authority's own stated ignition time and its first public alert. It says nothing about where the fire was, and therefore nothing about how much time anyone had."
       },
@@ -260,8 +260,8 @@
           "upper_h": "10h05m18s"
         },
         "first_alert_to_first_order": {
-          "interval": "[8h22m, 8h22m]",
-          "exact": "8h22m05s",
+          "interval": "[6h11m, 6h11m]",
+          "exact": "6h11m18s",
           "note": "both endpoints are second-resolution PRIMARY_OPERATIONAL records, so this interval is exact"
         }
       },
@@ -438,8 +438,13 @@
         },
         {
           "from": "2025-03-26T17:21:41+09:00",
+          "to": "2025-03-26T17:51:06+09:00",
+          "gap": "0h29m25s"
+        },
+        {
+          "from": "2025-03-26T17:51:06+09:00",
           "to": "2025-03-26T18:07:27+09:00",
-          "gap": "0h45m46s"
+          "gap": "0h16m21s"
         },
         {
           "from": "2025-03-26T18:07:27+09:00",
@@ -453,34 +458,29 @@
         },
         {
           "from": "2025-03-26T18:08:34+09:00",
-          "to": "2025-03-26T20:19:53+09:00",
-          "gap": "2h11m19s"
+          "to": "2025-03-26T18:09:10+09:00",
+          "gap": "0h00m36s"
         },
         {
-          "from": "2025-03-26T20:19:53+09:00",
-          "to": "2025-03-26T20:31:07+09:00",
-          "gap": "0h11m14s"
-        },
-        {
-          "from": "2025-03-26T20:31:07+09:00",
-          "to": "2025-03-26T21:13:55+09:00",
-          "gap": "0h42m48s"
+          "from": "2025-03-26T18:09:10+09:00",
+          "to": "2025-03-26T18:40:17+09:00",
+          "gap": "0h31m07s"
         }
       ]
     },
     "청송군": {
       "county": "청송군",
-      "alerts_issued": 19,
-      "evacuation_orders": 14,
-      "first_alert_kst": "2025-03-22T13:39:21+09:00",
-      "first_alert_text": "도내 산불이 다수 발생중이며 건조한 날씨와 바람으로 산불위험이 매우 높으니, 소각을 금지하여 주시고 산불이 발생하지 않도록 주의하여 주시기 바랍니다.[청송군]",
-      "first_alert_record_id": "231379",
+      "alerts_issued": 24,
+      "evacuation_orders": 23,
+      "first_alert_kst": "2025-03-25T16:49:19+09:00",
+      "first_alert_text": "(대피명령 발령) 산불이 확산됨에 따라 파천면 병부리 주민들은 주왕산관광호텔 파천면 지경리 안덕면 고와리 주민들은 임업인종합연수원으로 대피하시기 바랍니다[청송군]",
+      "first_alert_record_id": "231902",
       "reported_ignition_to_first_alert": {
-        "interval": "[2h13m, 2h15m]",
-        "lower_seconds": 8002.0,
-        "upper_seconds": 8121.0,
-        "lower_h": "2h13m22s",
-        "upper_h": "2h15m21s",
+        "interval": "[77h23m, 77h25m]",
+        "lower_seconds": 278600.0,
+        "upper_seconds": 278719.0,
+        "lower_h": "77h23m20s",
+        "upper_h": "77h25m19s",
         "kind": "REPORTED_IGNITION -> FIRST_PUBLIC_WARNING by this authority",
         "caveat": "NOT a warning lead time. It measures the gap between an authority's own stated ignition time and its first public alert. It says nothing about where the fire was, and therefore nothing about how much time anyone had."
       },
@@ -494,8 +494,8 @@
           "upper_h": "77h25m19s"
         },
         "first_alert_to_first_order": {
-          "interval": "[75h09m, 75h09m]",
-          "exact": "75h09m58s",
+          "interval": "[0h00m, 0h00m]",
+          "exact": "0h00m00s",
           "note": "both endpoints are second-resolution PRIMARY_OPERATIONAL records, so this interval is exact"
         }
       },
@@ -507,8 +507,13 @@
         },
         {
           "from": "2025-03-25T16:55:48+09:00",
+          "to": "2025-03-25T17:12:16+09:00",
+          "gap": "0h16m28s"
+        },
+        {
+          "from": "2025-03-25T17:12:16+09:00",
           "to": "2025-03-25T17:29:41+09:00",
-          "gap": "0h33m53s"
+          "gap": "0h17m25s"
         },
         {
           "from": "2025-03-25T17:29:41+09:00",
@@ -552,8 +557,43 @@
         },
         {
           "from": "2025-03-26T15:54:31+09:00",
+          "to": "2025-03-26T15:57:35+09:00",
+          "gap": "0h03m04s"
+        },
+        {
+          "from": "2025-03-26T15:57:35+09:00",
+          "to": "2025-03-26T16:00:39+09:00",
+          "gap": "0h03m04s"
+        },
+        {
+          "from": "2025-03-26T16:00:39+09:00",
+          "to": "2025-03-26T16:02:28+09:00",
+          "gap": "0h01m49s"
+        },
+        {
+          "from": "2025-03-26T16:02:28+09:00",
+          "to": "2025-03-26T16:10:17+09:00",
+          "gap": "0h07m49s"
+        },
+        {
+          "from": "2025-03-26T16:10:17+09:00",
+          "to": "2025-03-26T16:19:15+09:00",
+          "gap": "0h08m58s"
+        },
+        {
+          "from": "2025-03-26T16:19:15+09:00",
+          "to": "2025-03-27T13:23:33+09:00",
+          "gap": "21h04m18s"
+        },
+        {
+          "from": "2025-03-27T13:23:33+09:00",
+          "to": "2025-03-27T14:06:11+09:00",
+          "gap": "0h42m38s"
+        },
+        {
+          "from": "2025-03-27T14:06:11+09:00",
           "to": "2025-03-27T15:55:28+09:00",
-          "gap": "24h00m57s"
+          "gap": "1h49m17s"
         },
         {
           "from": "2025-03-27T15:55:28+09:00",
@@ -562,24 +602,29 @@
         },
         {
           "from": "2025-03-27T16:27:19+09:00",
+          "to": "2025-03-30T03:12:38+09:00",
+          "gap": "58h45m19s"
+        },
+        {
+          "from": "2025-03-30T03:12:38+09:00",
           "to": "2025-03-30T03:34:55+09:00",
-          "gap": "59h07m36s"
+          "gap": "0h22m17s"
         }
       ]
     },
     "영양군": {
       "county": "영양군",
-      "alerts_issued": 26,
+      "alerts_issued": 19,
       "evacuation_orders": 4,
-      "first_alert_kst": "2025-03-22T16:14:02+09:00",
-      "first_alert_text": "도내 산불이 다수 발생중이며 건조한 날씨와 바람으로 산불위험이 매우 높으니, 소각을 금지하여 주시고 산불이 발생하지 않도록 주의하여 주시기 바랍니다. [영양군]",
-      "first_alert_record_id": "231424",
+      "first_alert_kst": "2025-03-23T11:30:44+09:00",
+      "first_alert_text": "산불재난 국가위기경보 <심각> 단계 발령. 실수로 산불을 냈더라도 벌금 또는 징역형 등 처벌을 받게 되니, 소각 행위 금지. 산불 발생 시 즉시 신고[영양군]",
+      "first_alert_record_id": "231505",
       "reported_ignition_to_first_alert": {
-        "interval": "[4h48m, 4h50m]",
-        "lower_seconds": 17283.0,
-        "upper_seconds": 17402.0,
-        "lower_h": "4h48m03s",
-        "upper_h": "4h50m02s",
+        "interval": "[24h04m, 24h06m]",
+        "lower_seconds": 86685.0,
+        "upper_seconds": 86804.0,
+        "lower_h": "24h04m45s",
+        "upper_h": "24h06m44s",
         "kind": "REPORTED_IGNITION -> FIRST_PUBLIC_WARNING by this authority",
         "caveat": "NOT a warning lead time. It measures the gap between an authority's own stated ignition time and its first public alert. It says nothing about where the fire was, and therefore nothing about how much time anyone had."
       },
@@ -593,8 +638,8 @@
           "upper_h": "78h54m45s"
         },
         "first_alert_to_first_order": {
-          "interval": "[74h04m, 74h04m]",
-          "exact": "74h04m43s",
+          "interval": "[54h48m, 54h48m]",
+          "exact": "54h48m01s",
           "note": "both endpoints are second-resolution PRIMARY_OPERATIONAL records, so this interval is exact"
         }
       },
@@ -620,15 +665,15 @@
       "county": "영덕군",
       "alerts_issued": 14,
       "evacuation_orders": 5,
-      "first_alert_kst": "2025-03-24T17:02:00+09:00",
-      "first_alert_text": "고속도로 인근 산불로 서산영덕선 북의성IC~영덕TG 양방향 전면차단 중이오니 국도우회 바랍니다.[영덕군]",
-      "first_alert_record_id": "231681",
+      "first_alert_kst": "2025-03-25T18:21:50+09:00",
+      "first_alert_text": "영덕군 달산면, 지품면에 거주하시는 군민들께서는 영덕읍 국민체육센터로 주민대피하여 주시기 바랍니다. [영덕군]",
+      "first_alert_record_id": "231969",
       "reported_ignition_to_first_alert": {
-        "interval": "[53h36m, 53h38m]",
-        "lower_seconds": 192961.0,
-        "upper_seconds": 193080.0,
-        "lower_h": "53h36m01s",
-        "upper_h": "53h38m00s",
+        "interval": "[78h55m, 78h57m]",
+        "lower_seconds": 284151.0,
+        "upper_seconds": 284270.0,
+        "lower_h": "78h55m51s",
+        "upper_h": "78h57m50s",
         "kind": "REPORTED_IGNITION -> FIRST_PUBLIC_WARNING by this authority",
         "caveat": "NOT a warning lead time. It measures the gap between an authority's own stated ignition time and its first public alert. It says nothing about where the fire was, and therefore nothing about how much time anyone had."
       },
@@ -642,8 +687,8 @@
           "upper_h": "79h34m23s"
         },
         "first_alert_to_first_order": {
-          "interval": "[25h56m, 25h56m]",
-          "exact": "25h56m23s",
+          "interval": "[0h36m, 0h36m]",
+          "exact": "0h36m33s",
           "note": "both endpoints are second-resolution PRIMARY_OPERATIONAL records, so this interval is exact"
         }
       },
@@ -671,5 +716,5 @@
       ]
     }
   },
-  "generated": "2026-09-20T03:05:38.960540+00:00"
+  "generated": "2026-09-20T03:14:56.444142+00:00"
 }

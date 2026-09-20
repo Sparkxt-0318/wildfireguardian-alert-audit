@@ -93,9 +93,9 @@ credentials, because per-locality arrival times were never recorded.
 
 What **is** computed, and named for what it measures:
 
-- reported ignition → first public warning, five counties, ±2 s
-- reported ignition → first formal evacuation order, five counties, ±2 s
-- first alert → first order, five counties, exact
+- reported ignition → first public warning, five counties, ±1 minute
+- reported ignition → first formal evacuation order, five counties, ±1 minute
+- first warning → first order, five counties, exact to the second
 
 ---
 

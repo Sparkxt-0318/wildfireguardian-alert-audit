@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
+from enum import Enum
 from typing import Final
 
 from .model import Quantity
@@ -211,13 +212,28 @@ _DIRECTIVE_PATTERNS: Final[tuple[re.Pattern[str], ...]] = (
 )
 
 
-def is_evacuation_directive(text: str) -> bool:
-    """True when the text instructs people to evacuate, order or not.
+#: Instructions to move that do not use the verb 대피: 집결 (assemble),
+#: 피신 (take refuge), 이동 (move to).
+_DIRECTIVE_ALT: Final[tuple[re.Pattern[str], ...]] = (
+    re.compile(r"(집결|피신)\s*(하시기|하시길|바랍니다|바람|하십시오|하세요|해\s*주)"),
+    re.compile(r"(으로|로)\s*(집결|피신)"),
+)
 
-    A formal 대피명령 is also a directive, so this is a superset. Callers
-    report the two counts separately (see ``reports/LEAD_TIME_RESULTS.md``).
+
+def is_evacuation_directive(text: str) -> bool:
+    """True when the text instructs people to leave, order or not.
+
+    A formal 대피명령 **is** also a directive, so this must be a superset. It
+    was not: three 의성군 orders tell people to 집결 (assemble at) a school
+    rather than 대피, which produced the impossible published result of 58
+    orders against 57 directives. The formal-order check is therefore folded in
+    explicitly rather than relied upon to fall out of the patterns.
     """
-    return any(p.search(text) for p in _DIRECTIVE_PATTERNS)
+    if Quantity.EVACUATION_ORDER in parse(text).quantities:
+        return True
+    return any(
+        p.search(text) for p in (_DIRECTIVE_PATTERNS + _DIRECTIVE_ALT)
+    )
 
 
 #: Times printed in Korean prose: "오후 3시 30분", "15시30분", "15:30".
@@ -270,3 +286,120 @@ def find_times(text: str) -> list[TimeMention]:
 
     found.sort(key=lambda t: t.start)
     return found
+
+
+# ---------------------------------------------------------------------------
+# Alert purpose classification
+# ---------------------------------------------------------------------------
+#
+# An adversarial audit found that selecting "the first alert about this fire"
+# by testing `"산불" in text` picks up the wrong record for four counties out
+# of five. Every routine burn-ban SMS in Korea contains 산불, and so does an
+# expressway-closure notice. Three counties' "first alert" turned out to be the
+# same province-wide prevention boilerplate, word for word, and a fourth was a
+# road closure - about 서산영덕선, the very road this package's geography module
+# exists to keep out of locality inference.
+#
+# The fix is to classify what an alert is FOR, rather than testing whether a
+# word appears in it.
+
+#: Generic prevention/burn-ban messaging. Not a warning about an incident.
+_RISK_ADVISORY: Final[tuple[re.Pattern[str], ...]] = (
+    re.compile(r"산불\s*위험"),
+    re.compile(r"산불발생\s*위험"),
+    re.compile(r"소각\s*(을|행위)?\s*(금지|자제|삼가)"),
+    re.compile(r"발생하지\s*않도록"),
+    re.compile(r"입산\s*(을)?\s*(자제|금지)(?!.*대피)"),
+    re.compile(r"화기물?\s*소지"),
+    re.compile(r"영농부산물"),
+)
+
+#: Traffic/rail impact. A distinct quantity (ROAD_IMPACT), not a fire warning.
+_ROAD_IMPACT: Final[tuple[re.Pattern[str], ...]] = (
+    re.compile(r"(전면)?\s*(차단|통제)\s*(중|합니다|하오니|예정)"),
+    re.compile(r"국도\s*우회"),
+    re.compile(r"우회\s*(바랍니다|하시기)"),
+    re.compile(r"(열차|철도)\s*운행\s*(중단|조정)"),
+    re.compile(r"(IC|TG|나들목|분기점|톨게이트)"),
+)
+
+#: Utility/infrastructure consequences of a fire. Not a warning of the fire.
+_INFRASTRUCTURE: Final[tuple[re.Pattern[str], ...]] = (
+    re.compile(r"단수"),
+    re.compile(r"정전|단전"),
+    re.compile(r"통신\s*(장애|두절)"),
+    re.compile(r"수돗물"),
+)
+
+#: Positive evidence that the alert concerns an actual ongoing incident.
+_INCIDENT_REFERENCE: Final[tuple[re.Pattern[str], ...]] = (
+    re.compile(r"산불\s*확산"),
+    re.compile(r"확산\s*(중|되고|됨|으로)"),
+    re.compile(r"(의성|안평|안계|금성)\s*(군|면)?\s*산불"),
+    re.compile(r"산불이?\s*(접근|진행|번지)"),
+    re.compile(r"발화지점"),
+    # 산불 발생 reports a fire; 산불 발생 위험 reports a risk of one.
+    re.compile(r"산불\s*발생(?!\s*(위험|우려|예방))"),
+)
+
+
+class AlertPurpose(str, Enum):
+    """What an emergency alert is for.
+
+    Ordered by how directly it warns a person about an ongoing fire.
+    """
+
+    EVACUATION_ORDER = "EVACUATION_ORDER"
+    EVACUATION_DIRECTIVE = "EVACUATION_DIRECTIVE"
+    INCIDENT_WARNING = "INCIDENT_WARNING"
+    ROAD_IMPACT = "ROAD_IMPACT"
+    INFRASTRUCTURE_NOTICE = "INFRASTRUCTURE_NOTICE"
+    FIRE_RISK_ADVISORY = "FIRE_RISK_ADVISORY"
+    OTHER = "OTHER"
+
+    @property
+    def warns_about_an_incident(self) -> bool:
+        """Is this a public warning about a fire that is actually burning?
+
+        Road closures and utility notices are consequences of a fire and
+        genuinely inform people, but they are not warnings *of* it, and a
+        burn-ban advisory is not about any particular fire at all.
+        """
+        return self in (
+            AlertPurpose.EVACUATION_ORDER,
+            AlertPurpose.EVACUATION_DIRECTIVE,
+            AlertPurpose.INCIDENT_WARNING,
+        )
+
+
+def classify_alert_purpose(text: str) -> AlertPurpose:
+    """Classify an emergency alert by what it is for.
+
+    Order matters. An evacuation order that also mentions a road closure is an
+    evacuation order; a road closure that mentions a fire is not a warning.
+    """
+    quantities = parse(text).quantities
+    if Quantity.EVACUATION_ORDER in quantities and not re.search(
+        r"(해제|종료|미발령)", text
+    ):
+        return AlertPurpose.EVACUATION_ORDER
+    if is_evacuation_directive(text) and not re.search(r"(해제|종료)", text):
+        return AlertPurpose.EVACUATION_DIRECTIVE
+
+    # Infrastructure and road consequences first: these name a fire but warn
+    # about something else, and a closure notice is a ROAD_IMPACT record even
+    # though it mentions 산불.
+    if any(p.search(text) for p in _INFRASTRUCTURE):
+        return AlertPurpose.INFRASTRUCTURE_NOTICE
+    if any(p.search(text) for p in _ROAD_IMPACT):
+        return AlertPurpose.ROAD_IMPACT
+
+    # A concrete incident reference outranks generic advisory language. The
+    # genuine 의성군청 warning of 15:16:22 names the ignition point AND tells
+    # people to stay out of the hills; the 입산 금지 must not demote it to a
+    # burn-ban notice.
+    if any(p.search(text) for p in _INCIDENT_REFERENCE):
+        return AlertPurpose.INCIDENT_WARNING
+    if any(p.search(text) for p in _RISK_ADVISORY):
+        return AlertPurpose.FIRE_RISK_ADVISORY
+    return AlertPurpose.OTHER

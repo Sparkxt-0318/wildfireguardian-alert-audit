@@ -229,13 +229,43 @@ def _classify_token(tok: str) -> tuple[str, str] | None:
     return None
 
 
-def extract_from_clause(clause: str) -> ClauseResult:
+#: A token shaped like a municipality name: two or three Hangul syllables
+#: followed by 시 or 군.
+_MUNICIPALITY_SHAPED = re.compile(r"^[가-힣]{2,3}(시|군)$")
+
+
+def _names_out_of_scope_municipality(clause: str) -> str | None:
+    """Does this clause name a si/gun that is not in the gazetteer?
+
+    Korean eup/myeon names are **not nationally unique**. 부남면 exists in both
+    청송군 (Gyeongbuk) and 무주군 (North Jeolla). Because the reverse index is
+    built only from in-scope counties, it shows a single parent and the
+    ambiguity check passes, so 「무주군 부남면」 silently resolved to 청송군 -
+    with the disambiguating county written immediately before it and ignored.
+
+    That is strictly worse than the 서산영덕고속도로 case this module was built
+    around, because there is no road suffix to catch it. The guard: if a clause
+    names any municipality-shaped token the gazetteer does not know, refuse to
+    infer a parent county from an eup/myeon in that clause.
+    """
+    for m in _TOKEN.finditer(clause):
+        tok = m.group(0)
+        if _MUNICIPALITY_SHAPED.match(tok) and _match_si_gun(tok) is None:
+            return tok
+    return None
+
+
+def extract_from_clause(clause: str, *, foreign_hint: str | None = None) -> ClauseResult:
     """Extract administrative geography from a single clause.
 
     Tokens are classified before any gazetteer lookup, so a road or facility
     name is removed from consideration *as a whole token* and can never
     contribute its embedded county name.
     """
+    # The guard is text-wide, not clause-local: 「부남면 대소리 인근 산불 …
+    # [무주군]」 splits the disambiguating county into a different clause from
+    # the myeon it disambiguates.
+    foreign = foreign_hint or _names_out_of_scope_municipality(clause)
     matches: list[SpanMatch] = []
     province = si_gun = eup_myeon = ri = None
     road = facility = named_place = None
@@ -309,6 +339,20 @@ def extract_from_clause(clause: str) -> ClauseResult:
             if tok not in all_eup_myeon:
                 all_eup_myeon.append(tok)
             parent = parents[0] if len(parents) == 1 else None
+            if parent and foreign:
+                # An out-of-scope municipality is named in this clause, and
+                # eup/myeon names are not nationally unique. Refuse the
+                # inference rather than guess.
+                notes.append(
+                    f"{tok!r} not attributed to {parent}: the clause names "
+                    f"{foreign!r}, a municipality outside the gazetteer, and "
+                    "eup/myeon names are not nationally unique"
+                )
+                matches.append(
+                    SpanMatch(tok, s, e, "eup_myeon", tok, None, accepted=False,
+                              reason=f"ambiguous: clause names {foreign!r}")
+                )
+                continue
             if parent:
                 if si_gun is None:
                     si_gun = parent
@@ -362,16 +406,59 @@ def _match_si_gun(tok: str) -> tuple[str, str] | None:
     return None
 
 
+#: 「남선, 임하, 길안면」 - Korean coordination elides the shared suffix from
+#: all but the last conjunct. Reading only the suffixed one loses the rest.
+_ELIDED_LIST = re.compile(
+    r"((?:[가-힣]{2,3}\s*,\s*){1,6})([가-힣]{2,3}(?:면|읍|동))"
+)
+
+
+def _expand_elided_suffixes(text: str) -> list[str]:
+    """Return eup/myeon names recoverable from suffix-elided coordination.
+
+    Only names that exist in the gazetteer once the suffix is restored are
+    returned, so an unrelated comma list cannot manufacture localities.
+    """
+    out: list[str] = []
+    for m in _ELIDED_LIST.finditer(text):
+        suffix = m.group(2)[-1]
+        for bare in (b.strip() for b in m.group(1).split(",")):
+            if not bare:
+                continue
+            candidate = bare + suffix
+            if candidate in gz.EUP_MYEON_PARENT and candidate not in out:
+                out.append(candidate)
+    return out
+
+
 def extract(text: str) -> list[ClauseResult]:
     """Split into clauses and extract per clause.
 
     Returns one result per clause. Callers attach a timestamp to the clause it
     occurred in - never to the first clause's location (X-4).
     """
+    foreign = _names_out_of_scope_municipality(text)
     parts = [p for p in _CLAUSE_SPLIT.split(text) if p and p.strip()]
     if not parts:
         parts = [text]
-    return [extract_from_clause(p) for p in parts]
+    results = [extract_from_clause(p, foreign_hint=foreign) for p in parts]
+
+    # Restore names lost to suffix elision, attributing them to the clause
+    # whose suffixed conjunct anchors the list.
+    if not foreign:
+        for name in _expand_elided_suffixes(text):
+            for r in results:
+                if name in r.all_eup_myeon:
+                    break
+            else:
+                host = next(
+                    (r for r in results if r.all_eup_myeon), results[0]
+                )
+                host.all_eup_myeon.append(name)
+                parents = gz.EUP_MYEON_PARENT.get(name, ())
+                if len(parents) == 1 and parents[0] not in host.all_si_gun:
+                    host.all_si_gun.append(parents[0])
+    return results
 
 
 def attribute(text: str) -> Geography | None:

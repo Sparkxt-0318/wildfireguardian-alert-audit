@@ -47,19 +47,20 @@ def fmt(seconds: float) -> str:
 def main() -> None:
     ev = json.loads(TL.read_text(encoding="utf-8"))["events"]
 
-    # "First alert about this fire" needs an explicit, stated rule, or the
-    # first alert in the window turns out to be an unrelated pre-fire dryness
-    # warning and the interval comes out negative. The rule: the alert must
-    # mention 산불 AND have been sent at or after the earliest reported
-    # ignition. An alert sent before the fire started cannot be about it.
-    floor = REPORTED_IGNITION.lower
-    warnings = [
-        e
-        for e in ev
-        if e["quantity"] == Quantity.FIRST_PUBLIC_WARNING.value
-        and "산불" in e["raw_text"]
-        and datetime.fromisoformat(e["send_time_kst"]).timestamp() >= floor
-    ]
+    # "First alert about this fire" is decided by what the alert is FOR, not by
+    # whether the word 산불 appears in it. Testing for the word selects the
+    # wrong record in four counties out of five: three pick up the same
+    # province-wide burn-ban boilerplate, and one picks up an expressway
+    # closure notice. classify_alert_purpose() separates a warning about a
+    # burning fire from a prevention advisory, a road closure and a utility
+    # notice - all of which mention 산불.
+    #
+    # Note there is deliberately NO ignition-time floor here. An earlier
+    # version filtered to alerts sent at or after the reported ignition, which
+    # made the metric structurally incapable of returning a negative value. If
+    # an authority warned before the stated ignition minute, that is a finding,
+    # not something to filter away.
+    warnings = [e for e in ev if e.get("warns_about_an_incident")]
 
     results = {"counties": {}, "generated": datetime.now(timezone.utc).isoformat()}
 
