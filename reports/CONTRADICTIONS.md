@@ -201,3 +201,110 @@ conclusion would have been false, and it would have been reached through a
 *successful* query rather than a failed one — which is why
 `docs/ACCESS_STATUS_MODEL.md` requires `NO_RELEVANT_RECORD` to be scoped to the
 surface queried and never generalised to the world.
+
+---
+
+## C-09 — The road-name trap occurred in the wild, in a real tertiary source
+
+**Status: resolved. This is the single strongest validation of `docs/EXCLUSION_RULES.md` X-3.**
+
+The brief instructed this audit to test that `서산영덕고속도로` must not imply
+`영덕군`. Following the citation chain revealed that the string is not merely a
+hypothetical — **it is itself a transcription error in a live tertiary source.**
+
+| Source | Class | Says |
+|---|---|---|
+| KBS `ncd=8207758` | `NEWS_REPORT` | 「**청주영덕선** 서의성IC∼안동분기점」 — the *Cheongju–Yeongdeok Line* |
+| Korean Wikipedia, citing that KBS article | `TERTIARY` | 「**서산영덕고속도로** 서의성 나들목~안동 분기점」 |
+
+Wikipedia renamed the expressway while citing the article that names it
+correctly, and separately dropped the `부산울산선` closure — which belongs to
+the **Ulju** fire, not the Uiseong one.
+
+Two distinct failures in one citation: a corrupted road name, and a closure
+migrated onto the wrong incident.
+
+Both are caught here. The token matcher rejects `서산영덕고속도로` and
+`청주영덕선` alike, so neither can contribute `영덕군`; and incident identity is
+explicit, so a closure cannot silently attach to the wrong fire.
+
+---
+
+## C-10 — A road name really did become a location, in a real source
+
+**Status: UNRESOLVED between the sources. Recorded because it is FM-05 occurring
+in published journalism.**
+
+For the Ulju (울주) fire, the reported location differs:
+
+| Source | Says |
+|---|---|
+| 연합뉴스 (body text) | 「울주군 **온산읍 운화리** 야산」 |
+| 뉴시스 headline, and Korean Wikipedia's fire table citing 산림청 | 「**온양읍**」 |
+
+The only occurrence of "온양" anywhere in the Yonhap text is the expressway
+interchange **`온양나들목`**.
+
+Whether the 온양읍 attribution originated in that interchange name cannot be
+established from what was retrieved, and this audit does not assert that it
+did. What can be said is that a place name appearing *only* inside a road
+feature is the precise condition X-3 exists to guard, and that two official-facing
+sources disagree about which 읍 the fire started in.
+
+---
+
+## C-11 — Primary records correct the secondary record, repeatedly
+
+**Status: resolved in favour of the primary records. Retained because the
+disagreements show what the alert corpus is worth.**
+
+Four alerts were harvested directly and compared against what secondary sources
+say about them. In every case the secondary account is wrong about the time, the
+scope, or both.
+
+| Record | Primary (harvested, verbatim) | Secondary claim | Discrepancy |
+|---|---|---|---|
+| `sn=231830` 안동시 | **15:31:32**; names **only** 어담1리, 어담2리, 금계리 → 신성초등학교 | Wikipedia: 15:30, 「**전 주민 대피령**」 (all-residents order) | ~92 s; and the record is a directive to three 리, **not** an all-residents order |
+| `sn=231944` 청송군 | **17:42:49**; 「(대피명령 발령) … **전 군민**은 …」 | Wikipedia: **17:00**, footnoted to this very record; 한국경제: 17:44, calls it 안전안내문자 | Wikipedia is 42 min early against its own citation; 한국경제 mislabels the message class |
+| `sn=232035` 포항시 | **22:03:43**; text states effect 「22:00**부로**」; names specific 리 | Wikipedia: 22:16 「대피령」; 경북매일: 22:00, headline 「대피 **권고**」 | 22:16 is unsupported; the record is neither county-wide nor an advisory |
+| `sn=231946` 안동시 | **17:47:49**; 「의성 **안계** 산불이 …」 | — | attributes the spread to the **안계** fire, not 안평 (see C-12) |
+
+`sn=232035` also demonstrates the time ontology doing real work: the **send**
+time is 22:03:43 (`ALERT_SEND_TIME`) while the message text states an
+**effective** time of 22:00 (`REPORT_TIME`). They differ by 3m43s. A pipeline
+with one timestamp field per record would have to discard one of them.
+
+---
+
+## C-12 — How many Uiseong ignitions? One, two, or three
+
+**Status: UNRESOLVED. Incident identity is genuinely open.**
+
+| Count | Locations | Sources |
+|---|---|---|
+| **One** | 안평면 괴산리 | KBS, 연합뉴스, 뉴시스 |
+| **Two** | 안평면 **and** 안계면 | 안동시 official page 「의성군 **안계면, 안평면** 산불로부터 확산」; Greenpeace report; **and primary alert `sn=231946`, which names 「의성 **안계** 산불」** |
+| **Three** | + 금성면 청로리 | 나무위키 (`TERTIARY`, not independently retrieved) |
+
+**Independent corroboration from a dataset, not a narrative.** KFS
+`15121205` (산불상태별 이력), queried successfully, contains **three separate
+의성군 rows** for 2025-03-22:
+
+```
+359264  의성군 안평면   진화시작 11:38   진화완료 03-28 17:15
+359684  의성군 금성면   진화시작 14:08   진화완료 03-23 08:11
+360084  의성군 안계면   진화시작 16:27   진화완료 03-28 17:24
+```
+
+Three distinct suppression records, three different 면, three different start
+times — matching the three-ignition account, from an administrative dataset that
+was not written to settle this question.
+
+**Consequence for this audit.** The reported-ignition interval
+`[11:24:00, 11:25:59]` belongs specifically to the **안평면 괴산리** ignition.
+It is not "the Uiseong fire's ignition" in general, and it must not be used as
+the origin time for spread into Andong, whose own alert credits the **안계**
+fire. `docs/RESEARCH_QUESTION.md` warns against assuming all reports describe
+one ignition; here the warning has teeth, and the shortest-lived of the three
+fires (금성면, out by 08:11 the next morning) is plainly not the one that
+reached the coast.

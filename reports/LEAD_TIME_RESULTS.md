@@ -41,7 +41,7 @@ measures. None of them is a warning lead time.
 
 | Term | Meaning |
 |---|---|
-| **reported ignition** | `[2025-03-22T11:24:00+09:00, 2025-03-22T11:25:59+09:00]` — evidence class **`DERIVED`**; see the note below. |
+| **reported ignition** | `[2025-03-22T11:24:00+09:00, 2025-03-22T11:25:59+09:00]` — evidence class **`DERIVED`**. Belongs specifically to the **안평면 괴산리** ignition; see the incident-identity caveat below. |
 | **formal evacuation order** | the alert text declares 대피명령 / 대피령 / 긴급대피 |
 | **evacuation directive** | the alert instructs people to evacuate, whether or not an order was formally declared. A superset of the above. |
 | **first alert about this fire** | earliest alert from that authority that mentions 산불 **and** was sent at or after the earliest reported ignition. The time floor matters: without it, each county's "first alert" is a pre-ignition dryness warning and the interval comes out negative. |
@@ -63,6 +63,31 @@ precision to the second that no record anywhere supplies.
 
 Consequence: every interval in the tables below inherits `DERIVED` status on
 its ignition side. The alert side remains `PRIMARY_OPERATIONAL` and exact.
+
+#### Incident-identity caveat — the interval belongs to ONE of three fires
+
+Citation-chain work and an administrative dataset agree that Uiseong had
+**three separate ignitions on 2025-03-22**, not one. KFS `15121205`, queried
+successfully, holds three distinct 의성군 rows:
+
+```
+안평면  suppression start 11:38   complete 03-28 17:15
+금성면  suppression start 14:08   complete 03-23 08:11
+안계면  suppression start 16:27   complete 03-28 17:24
+```
+
+The `[11:24, 11:25]` interval is the reported ignition of the **안평면 괴산리**
+fire only. Andong's own evacuation order `sn=231946` credits the spread to the
+「의성 **안계** 산불」, and Andong's municipal page says the fire came from
+「의성군 **안계면, 안평면** 산불」 — plural.
+
+**Consequence for every row below.** The intervals are measured from the 안평면
+reported ignition because that is the earliest and best-evidenced of the three.
+For Uiseong itself that pairing is sound. For the downstream counties it is a
+**convention, not a causal claim**: this audit cannot establish which of the
+three fires reached which county, so the later intervals should be read as
+"time since the first reported ignition in Uiseong", not as "time since the
+fire that reached us started".
 
 ### Result: reported ignition → first public warning
 
