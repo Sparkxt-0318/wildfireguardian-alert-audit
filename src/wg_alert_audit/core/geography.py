@@ -53,11 +53,26 @@ class SpanMatch:
 
 @dataclass(slots=True)
 class ClauseResult:
+    """Extraction for one clause.
+
+    ``geography`` carries the finest single reading, for callers that need one.
+    ``all_si_gun`` / ``all_eup_myeon`` carry **every** locality named in the
+    clause. Exposing only the first was a real recall defect: a cross-county
+    road-closure alert naming both 안동시 and 청송군 silently lost the second,
+    which is exactly the kind of record a multi-county timeline depends on.
+    """
+
     clause: str
     geography: Geography
     matches: list[SpanMatch] = field(default_factory=list)
     resolved: bool = True
     note: str = ""
+    #: Every si/gun named in this clause, in order of appearance.
+    all_si_gun: list[str] = field(default_factory=list)
+    #: Every eup/myeon/dong named in this clause, in order of appearance.
+    all_eup_myeon: list[str] = field(default_factory=list)
+    #: Every road/facility token seen, whether or not it embedded a place name.
+    all_non_localities: list[str] = field(default_factory=list)
 
 
 #: Case particles that are never part of a road name, so a token ending in one
@@ -77,6 +92,24 @@ _ROADLIKE_PARTICLES: tuple[str, ...] = ("으로", "로")
 #: Administrative suffixes unambiguous enough to license particle stripping.
 #: 도 is excluded on purpose: 고속도로 ends in 도 + 로 without being a province.
 _STRONG_ADMIN_SUFFIXES: tuple[str, ...] = ("시", "군", "구", "읍", "면", "동", "리")
+
+
+#: Hazard nouns that attach directly to a place name in Korean headlines and
+#: alerts: 의성산불 ("the Uiseong wildfire"), 안동화재. Splitting these is safe
+#: in a way that general substring matching is not, because the prefix must be
+#: an EXACT gazetteer name. 서산영덕고속도로 does not end in a hazard noun, so
+#: the X-3 guard is untouched.
+_HAZARD_NOUNS: tuple[str, ...] = ("산불", "화재", "지진", "산사태", "홍수", "폭우")
+
+
+def _split_hazard_compound(tok: str) -> str | None:
+    """``의성산불`` -> ``의성``. Returns ``None`` when no safe split applies."""
+    for noun in _HAZARD_NOUNS:
+        if tok.endswith(noun) and len(tok) > len(noun):
+            stem = tok[: -len(noun)]
+            if _is_direct_hit(stem):
+                return stem
+    return None
 
 
 def _is_direct_hit(tok: str) -> bool:
@@ -120,6 +153,10 @@ def _base_form(tok: str) -> str:
 
     if _is_direct_hit(base):
         return base
+
+    hazard = _split_hazard_compound(base)
+    if hazard:
+        return hazard
 
     for part in sorted(_ROADLIKE_PARTICLES, key=len, reverse=True):
         if base.endswith(part) and len(base) > len(part):
@@ -203,6 +240,9 @@ def extract_from_clause(clause: str) -> ClauseResult:
     province = si_gun = eup_myeon = ri = None
     road = facility = named_place = None
     notes: list[str] = []
+    all_si_gun: list[str] = []
+    all_eup_myeon: list[str] = []
+    all_non_localities: list[str] = []
 
     for m in _TOKEN.finditer(clause):
         tok, s, e = m.group(0), m.start(), m.end()
@@ -223,6 +263,8 @@ def extract_from_clause(clause: str) -> ClauseResult:
             )
             if kind == "other":
                 continue
+            if kind in ("road", "facility") and tok not in all_non_localities:
+                all_non_localities.append(tok)
             if kind == "road" and road is None:
                 road = tok
             elif kind == "facility" and facility is None:
@@ -255,6 +297,8 @@ def extract_from_clause(clause: str) -> ClauseResult:
                 notes.append(f"{canonical} is outside Gyeongbuk in the target window")
                 continue
             si_gun = si_gun or canonical
+            if canonical not in all_si_gun:
+                all_si_gun.append(canonical)
             matches.append(SpanMatch(tok, s, e, "si_gun", canonical, reason=how))
             continue
 
@@ -262,9 +306,14 @@ def extract_from_clause(clause: str) -> ClauseResult:
         if tok in gz.EUP_MYEON_PARENT:
             parents = gz.EUP_MYEON_PARENT[tok]
             eup_myeon = eup_myeon or tok
+            if tok not in all_eup_myeon:
+                all_eup_myeon.append(tok)
             parent = parents[0] if len(parents) == 1 else None
-            if parent and si_gun is None:
-                si_gun = parent
+            if parent:
+                if si_gun is None:
+                    si_gun = parent
+                if parent not in all_si_gun:
+                    all_si_gun.append(parent)
             matches.append(
                 SpanMatch(tok, s, e, "eup_myeon", tok, parent,
                           reason="gazetteer eup/myeon"
@@ -288,8 +337,16 @@ def extract_from_clause(clause: str) -> ClauseResult:
         facility=facility,
         raw=clause.strip(),
     )
-    return ClauseResult(clause.strip(), geo, matches, resolved=True,
-                        note="; ".join(notes))
+    return ClauseResult(
+        clause.strip(),
+        geo,
+        matches,
+        resolved=True,
+        note="; ".join(notes),
+        all_si_gun=all_si_gun,
+        all_eup_myeon=all_eup_myeon,
+        all_non_localities=all_non_localities,
+    )
 
 
 def _match_si_gun(tok: str) -> tuple[str, str] | None:

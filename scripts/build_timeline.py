@@ -19,6 +19,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from wg_alert_audit.core import gazetteer as gz  # noqa: E402
 from wg_alert_audit.core.geography import extract  # noqa: E402
 from wg_alert_audit.core.intervals import KST, TimeInterval  # noqa: E402
 from wg_alert_audit.core.korean import (  # noqa: E402
@@ -32,21 +33,31 @@ ROOT = Path(__file__).resolve().parents[1]
 ALERTS = ROOT / "data" / "normalized" / "alerts_archive.jsonl"
 OUT = ROOT / "data" / "timeline" / "timeline.json"
 
+#: Counties at the centre of the complex.
 TARGET_COUNTIES = {"의성군", "안동시", "청송군", "영양군", "영덕군"}
 
-#: Issuers whose alerts concern the Gyeongbuk complex.
-TARGET_ISSUERS = {
-    "의성군", "의성군청", "안동시", "청송군", "영양군", "영덕군", "경상북도",
-}
-
-
+#: Every Gyeongbuk municipality is mappable, not just the five. Restricting the
+#: mapping to TARGET_COUNTIES silently produced issuer_county=None for 포항시,
+#: which issued alerts about this fire.
 def issuer_county(issuer: str) -> str | None:
-    """Map an issuing authority to a county, where it names one."""
-    norm = issuer.replace("청", "") if issuer.endswith("군청") else issuer
-    for c in TARGET_COUNTIES:
-        if norm == c or norm == c[:-1]:
-            return c
+    """Map an issuing authority to a si/gun, where it names one."""
+    norm = issuer.strip()
+    for suffix in ("청", "시청", "군청"):
+        if norm.endswith(suffix) and len(norm) > len(suffix):
+            norm = norm[: -len("청")]
+            break
+    for canonical, aliases in gz.SI_GUN.items():
+        if norm == canonical or norm in aliases:
+            return canonical
     return None
+
+
+#: A record enters the timeline as a warning ABOUT THIS FIRE only if its text
+#: is about fire. Stamping every alert from a target county as
+#: `first_public_warning` put PM2.5 air-quality advisories into the wildfire
+#: timeline - a modelling error the inclusion rules did not catch, because
+#: INCLUSION_RULES I-4/I-5 gate on time and place but never on topic.
+FIRE_TOPIC_TOKENS = ("산불", "화재", "불길", "연기", "화선", "진화", "대피")
 
 
 def build() -> dict:
@@ -66,17 +77,30 @@ def build() -> dict:
         # issuer is a county government. Message-body geography is extracted
         # separately and never overrides it.
         clause_results = extract(text)
-        body_counties = sorted(
-            {c.geography.si_gun for c in clause_results if c.geography.si_gun}
-        )
-        roads = sorted({c.geography.road for c in clause_results if c.geography.road})
-        eups = sorted(
-            {c.geography.eup_myeon_dong for c in clause_results
-             if c.geography.eup_myeon_dong}
-        )
+        # Every locality named, not merely the first in each clause.
+        body_counties: list[str] = []
+        eups: list[str] = []
+        non_localities: list[str] = []
+        for c in clause_results:
+            for x in c.all_si_gun:
+                if x not in body_counties:
+                    body_counties.append(x)
+            for x in c.all_eup_myeon:
+                if x not in eups:
+                    eups.append(x)
+            for x in c.all_non_localities:
+                if x not in non_localities:
+                    non_localities.append(x)
 
-        relevant = bool(ic) or bool(TARGET_COUNTIES & set(body_counties))
-        if not relevant:
+        # In scope when one of the five complex counties issued the alert, or
+        # when any Gyeongbuk municipality issued one that NAMES a complex
+        # county - which is how 포항시's alert about the 의성 fire qualifies
+        # while 김천시's generic burn-ban notice does not.
+        in_area = ic in TARGET_COUNTIES or bool(
+            TARGET_COUNTIES & set(body_counties)
+        )
+        on_topic = any(t in text for t in FIRE_TOPIC_TOKENS)
+        if not (in_area and on_topic):
             continue
 
         labels = parse_ko(text)
@@ -90,10 +114,28 @@ def build() -> dict:
             "issuer_county": ic,
             "body_counties": body_counties,
             "body_eup_myeon": eups,
-            "roads_mentioned_not_localities": roads,
+            # Every road/facility token seen, whether or not it embedded a
+            # place name. Recording only the dangerous ones made the field
+            # vacuous as evidence: it was empty whether a road was correctly
+            # rejected or simply never noticed.
+            "non_locality_tokens": non_localities,
+            "roads_mentioned_not_localities": [
+                c.geography.road for c in clause_results if c.geography.road
+            ],
             "raw_text": text,
             "source_id": r["record_id"],
             "provenance": r["retrieval_provenance"],
+            # Every clock time written in the message body, verbatim, with no
+            # quantity asserted. Some alerts state a time without saying what
+            # happened at it - e.g. 「(대피명령발령) 11:25 안평면 괴산리 산61 산불
+            # 확산」, where 11:25 is almost certainly the ignition minute but the
+            # text says only 확산 (spread). Recording the datum without naming
+            # the quantity keeps it available to a human without the pipeline
+            # inferring an ignition report the Korean does not make.
+            "stated_times_in_text": [
+                {"verbatim": tm.raw, "hh_mm": f"{tm.hour:02d}:{tm.minute:02d}"}
+                for tm in find_times(text)
+            ],
         }
 
         # Claim 1: the alert was sent. Always true of every record.
@@ -104,7 +146,7 @@ def build() -> dict:
                 "time_role": "ALERT_SEND_TIME",
                 "evidence_class": "PRIMARY_OPERATIONAL",
                 "interval_kst": r["send_interval"],
-                "labels": quantities,
+                "labels": sorted(set(quantities)),
                 "is_evacuation_order": Quantity.EVACUATION_ORDER.value in quantities,
                 # Superset: an imperative instruction to leave, whether or not
                 # a formal 대피명령 was declared.
@@ -115,7 +157,12 @@ def build() -> dict:
         # Claim 2: where the text states an ignition time, record it as a
         # REPORTED ignition at the text's own resolution - never as an
         # observation, and never merged with the send time.
-        if Quantity.IGNITION.value in quantities or "발생" in text:
+        states_ignition = (
+            Quantity.REPORTED_IGNITION.value in quantities
+            or Quantity.IGNITION.value in quantities
+            or "발화지점" in text
+        )
+        if states_ignition:
             for tm in find_times(text):
                 sent = datetime.fromisoformat(r["send_time_kst"])
                 stated = sent.replace(
@@ -133,7 +180,10 @@ def build() -> dict:
                         "evidence_class": "PRIMARY_OPERATIONAL",
                         "interval_kst": TimeInterval.at_minute(stated).format(KST),
                         "stated_time_verbatim": tm.raw,
-                        "labels": quantities,
+                        "labels": sorted(set(quantities)),
+                        "is_evacuation_order": Quantity.EVACUATION_ORDER.value
+                        in quantities,
+                        "is_evacuation_directive": is_evacuation_directive(text),
                         "note": (
                             "an authority's stated ignition time carried inside an "
                             "operational alert. It is a REPORT of ignition, not an "

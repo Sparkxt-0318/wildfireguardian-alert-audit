@@ -27,13 +27,27 @@ from .model import Quantity
 
 @dataclass(frozen=True, slots=True)
 class LabelSpec:
-    """One lexicon entry."""
+    """One lexicon entry.
+
+    ``context_required`` and ``context_forbidden`` exist because some surfaces
+    are only events in the right company. 발생 ("occurrence") is the clearest
+    case: 산불 발생 reports a fire, but 연기 다량 발생 reports smoke, 인명사고
+    발생 reports casualties, 산불발생 위험 reports a *risk*, and 산불이 발생하지
+    않도록 asks that fires NOT occur. Treating the bare surface as an event
+    turns all four into ignition reports.
+    """
 
     surface: str
     quantity: Quantity | None
     gloss: str
     #: Longer surfaces that must be preferred over this one at the same span.
     blocked_by: tuple[str, ...] = ()
+    #: At least one must appear in the surrounding window, or the label is dropped.
+    context_required: tuple[str, ...] = ()
+    #: If any appears in the surrounding window, the label is dropped.
+    context_forbidden: tuple[str, ...] = ()
+    #: Characters of context inspected either side of the match.
+    context_window: int = 18
 
 
 #: Ordered longest-first at match time, not here.
@@ -45,14 +59,38 @@ LEXICON: Final[tuple[LabelSpec, ...]] = (
               blocked_by=("재발화", "최초발화")),
     LabelSpec("최초신고", Quantity.REPORTED_IGNITION, "first report to authorities"),
     LabelSpec("신고접수", Quantity.REPORTED_IGNITION, "report received"),
-    LabelSpec("발생", Quantity.REPORTED_IGNITION, "occurrence (as reported)"),
+    # 발화지점 is a LOCATION noun ("the ignition point"), not a report that an
+    # ignition just occurred. It must not yield a bare ignition event.
+    LabelSpec("발화지점", None, "ignition POINT - a location, not an event"),
+    LabelSpec(
+        "발생",
+        Quantity.REPORTED_IGNITION,
+        "occurrence of a fire, as reported",
+        # Only an occurrence OF a fire counts.
+        context_required=("산불", "화재"),
+        # ...and not a risk of one, a prevention notice, a negated one, or the
+        # occurrence of something else that merely mentions a fire nearby.
+        context_forbidden=(
+            "위험", "우려", "예방", "조심", "주의보", "경보 발령",
+            "않도록", "않게", "없도록",
+            "연기", "인명사고", "사고 발생", "정전", "단수", "피해 발생",
+        ),
+    ),
     # --- suppression family ----------------------------------------------
     LabelSpec("재진화", None, "re-suppression after a flare-up"),
     LabelSpec("주불진화", Quantity.CONTAINMENT, "main fire extinguished"),
     LabelSpec("진화완료", Quantity.CONTAINMENT, "suppression complete"),
     LabelSpec("완전진화", Quantity.CONTAINMENT, "fully extinguished"),
-    LabelSpec("진화", Quantity.CONTAINMENT, "suppression",
-              blocked_by=("재진화", "주불진화", "진화완료", "완전진화", "진화율", "진화중")),
+    LabelSpec(
+        "진화",
+        Quantity.CONTAINMENT,
+        "suppression",
+        blocked_by=("재진화", "주불진화", "진화완료", "완전진화", "진화율", "진화중"),
+        # Suppression IN PROGRESS is the opposite of containment. The veto list
+        # above only catches the unspaced 진화중; Korean writes 진화 중 and
+        # 진화 작업 중 just as often, so the spaced forms are vetoed by context.
+        context_forbidden=("진화 중", "진화중", "진화 작업", "진화작업", "진화율"),
+    ),
     LabelSpec("진화율", None, "containment percentage (a rate, not an event)"),
     # --- evacuation family -----------------------------------------------
     LabelSpec("대피명령", Quantity.EVACUATION_ORDER, "evacuation ORDER"),
@@ -128,6 +166,16 @@ def parse(text: str) -> ParseResult:
             s, e = m.span()
             if any(s < ce and cs < e for cs, ce in consumed):
                 continue  # covered by a longer surface already
+
+            if spec.context_required or spec.context_forbidden:
+                window = text[max(0, s - spec.context_window): e + spec.context_window]
+                if spec.context_required and not any(
+                    c in window for c in spec.context_required
+                ):
+                    continue
+                if any(c in window for c in spec.context_forbidden):
+                    continue
+
             consumed.append((s, e))
             note = ""
             if spec.blocked_by:

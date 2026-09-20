@@ -67,6 +67,19 @@ EUP_MYEON: Final[dict[str, tuple[str, ...]]] = {
         "영덕읍", "강구면", "남정면", "달산면", "지품면", "축산면", "영해면",
         "병곡면", "창수면",
     ),
+    # Neighbouring municipalities that issued alerts about this fire. Included
+    # because the gazetteer's horizon is itself a source of silent error: an
+    # alert naming 포항 북구 죽장면 lost all three of its 면 simply because
+    # 포항시 was outside the five originally-scoped counties.
+    "포항시": (
+        "죽장면", "기북면", "송라면", "기계면", "신광면", "청하면", "흥해읍",
+        "연일읍", "오천읍", "대송면", "동해면", "장기면", "구룡포읍", "호미곶면",
+    ),
+    "영주시": ("풍기읍", "부석면", "단산면", "평은면", "이산면", "문수면", "장수면"),
+    "예천군": ("예천읍", "용문면", "감천면", "보문면", "호명면", "지보면", "풍양면"),
+    "봉화군": ("봉화읍", "물야면", "봉성면", "법전면", "춘양면", "소천면", "재산면"),
+    "울진군": ("울진읍", "평해읍", "북면", "근남면", "기성면", "온정면", "죽변면"),
+    "군위군": ("군위읍", "소보면", "효령면", "부계면", "우보면", "의흥면", "산성면"),
 }
 
 #: Reverse index eup/myeon -> parent. Ambiguous names map to a tuple.
