@@ -1,13 +1,27 @@
 # Current
 
-**Phase 0 complete.** Protocol documents written before any inspection of prior
-work; credential discovery and history exposure audit done (`docs/DECISIONS.md`
-D-004: no exposure found).
+**Phases 0–3 complete.** Protocol written before any data was touched; engine,
+adapters and CLI implemented with 196 tests; source discovery run across four
+independent tracks; corpus built and the timeline constructed.
 
-**Now in Phase 1 (Q1).** Source discovery running across four independent tracks:
-Korean emergency alerts, NASA FIRMS archive semantics, GK2A/NMSC, and
-KFS/NIFoS/MOIS/KMA official records. Each track records real HTTP outcomes and
-classifies them per `docs/ACCESS_STATUS_MODEL.md`.
+**Corpus as it stands**
 
-Blocking nothing. Phase 2 implementation proceeds in parallel, since the data
-model is fixed by the protocol rather than by what the sources turn out to hold.
+| | |
+|---|---|
+| Emergency alert records harvested | 1,688 (264 about this fire) |
+| Claims in the timeline | 311, across 5 counties |
+| Formal 대피명령 / evacuation directives | 132 / 181 |
+| GK2A L2 FF observation slots | 635 retrieved of 650 probed |
+| Tests | 196 passing |
+
+**Phase 4 in progress.** Two independent roles are running against the finished
+corpus: manual verification of a pre-registered 50-claim random sample (seed
+20250322), and an adversarial audit of the repository's own conclusions.
+
+**Known open items**
+
+- No PR is open. The target repository was empty, so this branch became the
+  default branch and there is no base to merge into. Raised with the user
+  rather than fabricating a base branch.
+- `reports/MANUAL_VERIFICATION.md` and `reports/FRESH_REBUILD_VERDICT.md` are
+  pending the two verification passes.

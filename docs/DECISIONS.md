@@ -90,3 +90,60 @@ si/gun. A county can be ~1000 km2; fire-front position within it is not implied.
 `SAME_COUNTY` and `NEARBY` are recorded but gated out of the calculation.
 **Consequence:** Fewer lead-time results, each defensible. Expected to be the
 binding constraint on Q4.
+
+---
+
+## D-007 — The public alert archive is treated as `PRIMARY_OPERATIONAL`
+**Date:** 2026-09-20
+**Context:** The historical alert **API** (`DSSP-IF-00247`) is credential-gated,
+but the same MOIS platform publishes the alerts themselves at
+`/disaster-data/disasterNotification` with no credential, carrying send time to
+the second, the message text as transmitted, the issuing authority and a stable
+record id.
+**Decision:** Classify these as `PRIMARY_OPERATIONAL`.
+**Reasoning, including the counter-argument:** the page is a *publication* of
+the records rather than the operational database itself, which is an argument
+for `OFFICIAL_RETROSPECTIVE`. It is rejected because the artifact reproduces the
+operational payload verbatim — the transmitted message text, its send timestamp
+and its issuer — rather than describing or summarising it, and it is published
+by the operating ministry rather than by a third party. It is the same relation
+a court transcript bears to a hearing. The audit records the distinction
+explicitly (`source_system` names the public archive, not the API), so a reader
+who disagrees can re-grade every record without losing information.
+**Consequence:** first-public-warning timing rests on `PRIMARY_OPERATIONAL`
+evidence. Had it been graded `OFFICIAL_RETROSPECTIVE`, the time role would fall
+to `REPORTED_ALERT_SEND_TIME` and every interval in
+`reports/LEAD_TIME_RESULTS.md` would carry that weaker label. The numbers would
+not change; their standing would.
+
+---
+
+## D-008 — "First alert about this fire" needs an explicit rule
+**Date:** 2026-09-20
+**Context:** Taking each county's earliest alert in the window produced
+*negative* intervals against the reported ignition. The cause was that the
+earliest alert from 의성군 in the window is a pre-ignition dryness warning
+(10:46:07, 「건조한 날씨와 강풍으로 산불발생 위험이 매우 높습니다」), which
+mentions 산불 without being about this fire.
+**Decision:** An alert counts as "about this fire" when it mentions 산불 **and**
+was sent at or after the earliest reported ignition (11:24:00). An alert sent
+before the fire began cannot be about it.
+**Consequence:** Uiseong's first alert about the fire is 12:50:32, not 10:46:07.
+The rule is stated in `reports/LEAD_TIME_RESULTS.md` so the filter is auditable,
+and it is deliberately crude — it would misclassify a warning about a *different*
+concurrent fire, which is why incident identity stays explicit.
+
+---
+
+## D-009 — Formal orders and evacuation directives are counted separately
+**Date:** 2026-09-20
+**Context:** `docs/EXCLUSION_RULES.md` X-5 requires that a generic mention of
+대피 not be read as a 대피명령. Applied strictly, an alert reading 「주민들께서는
+즉시 의성실내체육관으로 대피하시기 바랍니다」 is not an order — yet it plainly
+directs people to leave.
+**Decision:** Report both. `is_evacuation_order` stays strict (대피명령 / 대피령
+/ 긴급대피 only). `is_evacuation_directive` is a superset capturing imperative
+instructions to evacuate.
+**Consequence:** 132 formal orders and 181 directives. Reporting only the first
+would understate what was communicated; reporting only the second would
+overstate the formal record. Neither number stands alone.
