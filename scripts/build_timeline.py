@@ -21,7 +21,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from wg_alert_audit.core.geography import extract  # noqa: E402
 from wg_alert_audit.core.intervals import KST, TimeInterval  # noqa: E402
-from wg_alert_audit.core.korean import find_times, parse as parse_ko  # noqa: E402
+from wg_alert_audit.core.korean import (  # noqa: E402
+    find_times,
+    is_evacuation_directive,
+    parse as parse_ko,
+)
 from wg_alert_audit.core.model import Quantity  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -102,6 +106,9 @@ def build() -> dict:
                 "interval_kst": r["send_interval"],
                 "labels": quantities,
                 "is_evacuation_order": Quantity.EVACUATION_ORDER.value in quantities,
+                # Superset: an imperative instruction to leave, whether or not
+                # a formal 대피명령 was declared.
+                "is_evacuation_directive": is_evacuation_directive(text),
             }
         )
 

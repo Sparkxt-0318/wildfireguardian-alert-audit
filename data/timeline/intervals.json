@@ -1,0 +1,665 @@
+{
+  "counties": {
+    "의성군": {
+      "county": "의성군",
+      "alerts_issued": 66,
+      "evacuation_orders": 58,
+      "first_alert_kst": "2025-03-22T12:50:32+09:00",
+      "first_alert_text": "(대피명령발령) 11:25 안평면 괴산리 산61 산불 확산. 인근 주민과 등산객은 안전한 곳(안평면 신월리 125 신동마을회관)으로 대피 바람 [의성군]",
+      "first_alert_record_id": "231369",
+      "reported_ignition_to_first_alert": {
+        "interval": "[1h24m, 1h26m]",
+        "lower_seconds": 5073.0,
+        "upper_seconds": 5192.0,
+        "lower_h": "1h24m33s",
+        "upper_h": "1h26m32s",
+        "kind": "REPORTED_IGNITION -> FIRST_PUBLIC_WARNING by this authority",
+        "caveat": "NOT a warning lead time. It measures the gap between an authority's own stated ignition time and its first public alert. It says nothing about where the fire was, and therefore nothing about how much time anyone had."
+      },
+      "first_evacuation_order": {
+        "kst": "2025-03-22T12:50:32+09:00",
+        "record_id": "231369",
+        "text": "(대피명령발령) 11:25 안평면 괴산리 산61 산불 확산. 인근 주민과 등산객은 안전한 곳(안평면 신월리 125 신동마을회관)으로 대피 바람 [의성군]",
+        "reported_ignition_to_first_order": {
+          "interval": "[1h24m, 1h26m]",
+          "lower_h": "1h24m33s",
+          "upper_h": "1h26m32s"
+        },
+        "first_alert_to_first_order": {
+          "interval": "[0h00m, 0h00m]",
+          "exact": "0h00m00s",
+          "note": "both endpoints are second-resolution PRIMARY_OPERATIONAL records, so this interval is exact"
+        }
+      },
+      "order_escalation_gaps": [
+        {
+          "from": "2025-03-22T12:50:32+09:00",
+          "to": "2025-03-22T13:34:51+09:00",
+          "gap": "0h44m19s"
+        },
+        {
+          "from": "2025-03-22T13:34:51+09:00",
+          "to": "2025-03-22T17:37:35+09:00",
+          "gap": "4h02m44s"
+        },
+        {
+          "from": "2025-03-22T17:37:35+09:00",
+          "to": "2025-03-23T16:45:14+09:00",
+          "gap": "23h07m39s"
+        },
+        {
+          "from": "2025-03-23T16:45:14+09:00",
+          "to": "2025-03-24T13:17:36+09:00",
+          "gap": "20h32m22s"
+        },
+        {
+          "from": "2025-03-24T13:17:36+09:00",
+          "to": "2025-03-24T13:42:24+09:00",
+          "gap": "0h24m48s"
+        },
+        {
+          "from": "2025-03-24T13:42:24+09:00",
+          "to": "2025-03-24T13:56:04+09:00",
+          "gap": "0h13m40s"
+        },
+        {
+          "from": "2025-03-24T13:56:04+09:00",
+          "to": "2025-03-24T14:30:43+09:00",
+          "gap": "0h34m39s"
+        },
+        {
+          "from": "2025-03-24T14:30:43+09:00",
+          "to": "2025-03-24T14:37:31+09:00",
+          "gap": "0h06m48s"
+        },
+        {
+          "from": "2025-03-24T14:37:31+09:00",
+          "to": "2025-03-24T14:45:38+09:00",
+          "gap": "0h08m07s"
+        },
+        {
+          "from": "2025-03-24T14:45:38+09:00",
+          "to": "2025-03-24T14:55:27+09:00",
+          "gap": "0h09m49s"
+        },
+        {
+          "from": "2025-03-24T14:55:27+09:00",
+          "to": "2025-03-24T16:31:38+09:00",
+          "gap": "1h36m11s"
+        },
+        {
+          "from": "2025-03-24T16:31:38+09:00",
+          "to": "2025-03-24T16:36:02+09:00",
+          "gap": "0h04m24s"
+        },
+        {
+          "from": "2025-03-24T16:36:02+09:00",
+          "to": "2025-03-24T16:36:36+09:00",
+          "gap": "0h00m34s"
+        },
+        {
+          "from": "2025-03-24T16:36:36+09:00",
+          "to": "2025-03-24T16:43:56+09:00",
+          "gap": "0h07m20s"
+        },
+        {
+          "from": "2025-03-24T16:43:56+09:00",
+          "to": "2025-03-24T16:59:27+09:00",
+          "gap": "0h15m31s"
+        },
+        {
+          "from": "2025-03-24T16:59:27+09:00",
+          "to": "2025-03-24T18:00:17+09:00",
+          "gap": "1h00m50s"
+        },
+        {
+          "from": "2025-03-24T18:00:17+09:00",
+          "to": "2025-03-24T18:05:20+09:00",
+          "gap": "0h05m03s"
+        },
+        {
+          "from": "2025-03-24T18:05:20+09:00",
+          "to": "2025-03-24T18:35:01+09:00",
+          "gap": "0h29m41s"
+        },
+        {
+          "from": "2025-03-24T18:35:01+09:00",
+          "to": "2025-03-24T18:35:25+09:00",
+          "gap": "0h00m24s"
+        },
+        {
+          "from": "2025-03-24T18:35:25+09:00",
+          "to": "2025-03-25T12:34:24+09:00",
+          "gap": "17h58m59s"
+        },
+        {
+          "from": "2025-03-25T12:34:24+09:00",
+          "to": "2025-03-25T14:46:14+09:00",
+          "gap": "2h11m50s"
+        },
+        {
+          "from": "2025-03-25T14:46:14+09:00",
+          "to": "2025-03-25T14:51:12+09:00",
+          "gap": "0h04m58s"
+        },
+        {
+          "from": "2025-03-25T14:51:12+09:00",
+          "to": "2025-03-25T14:53:39+09:00",
+          "gap": "0h02m27s"
+        },
+        {
+          "from": "2025-03-25T14:53:39+09:00",
+          "to": "2025-03-25T14:58:32+09:00",
+          "gap": "0h04m53s"
+        },
+        {
+          "from": "2025-03-25T14:58:32+09:00",
+          "to": "2025-03-25T15:06:06+09:00",
+          "gap": "0h07m34s"
+        },
+        {
+          "from": "2025-03-25T15:06:06+09:00",
+          "to": "2025-03-25T15:09:39+09:00",
+          "gap": "0h03m33s"
+        },
+        {
+          "from": "2025-03-25T15:09:39+09:00",
+          "to": "2025-03-25T15:14:59+09:00",
+          "gap": "0h05m20s"
+        },
+        {
+          "from": "2025-03-25T15:14:59+09:00",
+          "to": "2025-03-25T15:20:04+09:00",
+          "gap": "0h05m05s"
+        },
+        {
+          "from": "2025-03-25T15:20:04+09:00",
+          "to": "2025-03-25T15:26:48+09:00",
+          "gap": "0h06m44s"
+        },
+        {
+          "from": "2025-03-25T15:26:48+09:00",
+          "to": "2025-03-25T15:37:16+09:00",
+          "gap": "0h10m28s"
+        },
+        {
+          "from": "2025-03-25T15:37:16+09:00",
+          "to": "2025-03-25T15:40:51+09:00",
+          "gap": "0h03m35s"
+        },
+        {
+          "from": "2025-03-25T15:40:51+09:00",
+          "to": "2025-03-25T15:41:10+09:00",
+          "gap": "0h00m19s"
+        },
+        {
+          "from": "2025-03-25T15:41:10+09:00",
+          "to": "2025-03-25T15:47:49+09:00",
+          "gap": "0h06m39s"
+        },
+        {
+          "from": "2025-03-25T15:47:49+09:00",
+          "to": "2025-03-25T15:52:06+09:00",
+          "gap": "0h04m17s"
+        },
+        {
+          "from": "2025-03-25T15:52:06+09:00",
+          "to": "2025-03-25T16:14:11+09:00",
+          "gap": "0h22m05s"
+        },
+        {
+          "from": "2025-03-25T16:14:11+09:00",
+          "to": "2025-03-25T16:17:57+09:00",
+          "gap": "0h03m46s"
+        },
+        {
+          "from": "2025-03-25T16:17:57+09:00",
+          "to": "2025-03-25T16:26:09+09:00",
+          "gap": "0h08m12s"
+        },
+        {
+          "from": "2025-03-25T16:26:09+09:00",
+          "to": "2025-03-25T16:29:17+09:00",
+          "gap": "0h03m08s"
+        },
+        {
+          "from": "2025-03-25T16:29:17+09:00",
+          "to": "2025-03-25T16:30:53+09:00",
+          "gap": "0h01m36s"
+        },
+        {
+          "from": "2025-03-25T16:30:53+09:00",
+          "to": "2025-03-25T16:43:17+09:00",
+          "gap": "0h12m24s"
+        }
+      ]
+    },
+    "안동시": {
+      "county": "안동시",
+      "alerts_issued": 106,
+      "evacuation_orders": 51,
+      "first_alert_kst": "2025-03-22T13:07:13+09:00",
+      "first_alert_text": "도내 산불이 많이 발생중이며 건조한 날씨와 바람으로 산불위험이 매우 높으니, 소각을 금지하여 주시고 산불이 발생하지 않도록 주의하여 주시기 바랍니다.[안동시]",
+      "first_alert_record_id": "231373",
+      "reported_ignition_to_first_alert": {
+        "interval": "[1h41m, 1h43m]",
+        "lower_seconds": 6074.0,
+        "upper_seconds": 6193.0,
+        "lower_h": "1h41m14s",
+        "upper_h": "1h43m13s",
+        "kind": "REPORTED_IGNITION -> FIRST_PUBLIC_WARNING by this authority",
+        "caveat": "NOT a warning lead time. It measures the gap between an authority's own stated ignition time and its first public alert. It says nothing about where the fire was, and therefore nothing about how much time anyone had."
+      },
+      "first_evacuation_order": {
+        "kst": "2025-03-22T21:29:18+09:00",
+        "record_id": "231457",
+        "text": "(대피명령 발령) 의성 산불 옥산면 입암리까지 확산, 길안면 백자리 및 금곡리 주민께서는 길안초등학교로 대피하시기 바랍니다.[안동시]",
+        "reported_ignition_to_first_order": {
+          "interval": "[10h03m, 10h05m]",
+          "lower_h": "10h03m19s",
+          "upper_h": "10h05m18s"
+        },
+        "first_alert_to_first_order": {
+          "interval": "[8h22m, 8h22m]",
+          "exact": "8h22m05s",
+          "note": "both endpoints are second-resolution PRIMARY_OPERATIONAL records, so this interval is exact"
+        }
+      },
+      "order_escalation_gaps": [
+        {
+          "from": "2025-03-22T21:29:18+09:00",
+          "to": "2025-03-24T14:06:32+09:00",
+          "gap": "40h37m14s"
+        },
+        {
+          "from": "2025-03-24T14:06:32+09:00",
+          "to": "2025-03-24T14:15:22+09:00",
+          "gap": "0h08m50s"
+        },
+        {
+          "from": "2025-03-24T14:15:22+09:00",
+          "to": "2025-03-24T14:16:27+09:00",
+          "gap": "0h01m05s"
+        },
+        {
+          "from": "2025-03-24T14:16:27+09:00",
+          "to": "2025-03-25T08:27:10+09:00",
+          "gap": "18h10m43s"
+        },
+        {
+          "from": "2025-03-25T08:27:10+09:00",
+          "to": "2025-03-25T13:23:53+09:00",
+          "gap": "4h56m43s"
+        },
+        {
+          "from": "2025-03-25T13:23:53+09:00",
+          "to": "2025-03-25T13:55:25+09:00",
+          "gap": "0h31m32s"
+        },
+        {
+          "from": "2025-03-25T13:55:25+09:00",
+          "to": "2025-03-25T14:32:51+09:00",
+          "gap": "0h37m26s"
+        },
+        {
+          "from": "2025-03-25T14:32:51+09:00",
+          "to": "2025-03-25T15:46:07+09:00",
+          "gap": "1h13m16s"
+        },
+        {
+          "from": "2025-03-25T15:46:07+09:00",
+          "to": "2025-03-25T15:57:04+09:00",
+          "gap": "0h10m57s"
+        },
+        {
+          "from": "2025-03-25T15:57:04+09:00",
+          "to": "2025-03-25T16:12:33+09:00",
+          "gap": "0h15m29s"
+        },
+        {
+          "from": "2025-03-25T16:12:33+09:00",
+          "to": "2025-03-25T16:16:01+09:00",
+          "gap": "0h03m28s"
+        },
+        {
+          "from": "2025-03-25T16:16:01+09:00",
+          "to": "2025-03-25T16:16:12+09:00",
+          "gap": "0h00m11s"
+        },
+        {
+          "from": "2025-03-25T16:16:12+09:00",
+          "to": "2025-03-25T16:35:17+09:00",
+          "gap": "0h19m05s"
+        },
+        {
+          "from": "2025-03-25T16:35:17+09:00",
+          "to": "2025-03-25T16:41:44+09:00",
+          "gap": "0h06m27s"
+        },
+        {
+          "from": "2025-03-25T16:41:44+09:00",
+          "to": "2025-03-25T16:48:50+09:00",
+          "gap": "0h07m06s"
+        },
+        {
+          "from": "2025-03-25T16:48:50+09:00",
+          "to": "2025-03-25T16:55:21+09:00",
+          "gap": "0h06m31s"
+        },
+        {
+          "from": "2025-03-25T16:55:21+09:00",
+          "to": "2025-03-25T17:01:44+09:00",
+          "gap": "0h06m23s"
+        },
+        {
+          "from": "2025-03-25T17:01:44+09:00",
+          "to": "2025-03-25T17:07:55+09:00",
+          "gap": "0h06m11s"
+        },
+        {
+          "from": "2025-03-25T17:07:55+09:00",
+          "to": "2025-03-25T17:11:46+09:00",
+          "gap": "0h03m51s"
+        },
+        {
+          "from": "2025-03-25T17:11:46+09:00",
+          "to": "2025-03-25T17:25:22+09:00",
+          "gap": "0h13m36s"
+        },
+        {
+          "from": "2025-03-25T17:25:22+09:00",
+          "to": "2025-03-25T17:47:49+09:00",
+          "gap": "0h22m27s"
+        },
+        {
+          "from": "2025-03-25T17:47:49+09:00",
+          "to": "2025-03-25T18:26:44+09:00",
+          "gap": "0h38m55s"
+        },
+        {
+          "from": "2025-03-25T18:26:44+09:00",
+          "to": "2025-03-25T18:48:18+09:00",
+          "gap": "0h21m34s"
+        },
+        {
+          "from": "2025-03-25T18:48:18+09:00",
+          "to": "2025-03-25T19:10:09+09:00",
+          "gap": "0h21m51s"
+        },
+        {
+          "from": "2025-03-25T19:10:09+09:00",
+          "to": "2025-03-25T19:38:02+09:00",
+          "gap": "0h27m53s"
+        },
+        {
+          "from": "2025-03-25T19:38:02+09:00",
+          "to": "2025-03-25T19:56:28+09:00",
+          "gap": "0h18m26s"
+        },
+        {
+          "from": "2025-03-25T19:56:28+09:00",
+          "to": "2025-03-25T19:58:37+09:00",
+          "gap": "0h02m09s"
+        },
+        {
+          "from": "2025-03-25T19:58:37+09:00",
+          "to": "2025-03-26T13:35:38+09:00",
+          "gap": "17h37m01s"
+        },
+        {
+          "from": "2025-03-26T13:35:38+09:00",
+          "to": "2025-03-26T14:27:40+09:00",
+          "gap": "0h52m02s"
+        },
+        {
+          "from": "2025-03-26T14:27:40+09:00",
+          "to": "2025-03-26T15:14:37+09:00",
+          "gap": "0h46m57s"
+        },
+        {
+          "from": "2025-03-26T15:14:37+09:00",
+          "to": "2025-03-26T15:48:10+09:00",
+          "gap": "0h33m33s"
+        },
+        {
+          "from": "2025-03-26T15:48:10+09:00",
+          "to": "2025-03-26T16:03:28+09:00",
+          "gap": "0h15m18s"
+        },
+        {
+          "from": "2025-03-26T16:03:28+09:00",
+          "to": "2025-03-26T17:07:37+09:00",
+          "gap": "1h04m09s"
+        },
+        {
+          "from": "2025-03-26T17:07:37+09:00",
+          "to": "2025-03-26T17:21:41+09:00",
+          "gap": "0h14m04s"
+        },
+        {
+          "from": "2025-03-26T17:21:41+09:00",
+          "to": "2025-03-26T18:07:27+09:00",
+          "gap": "0h45m46s"
+        },
+        {
+          "from": "2025-03-26T18:07:27+09:00",
+          "to": "2025-03-26T18:08:11+09:00",
+          "gap": "0h00m44s"
+        },
+        {
+          "from": "2025-03-26T18:08:11+09:00",
+          "to": "2025-03-26T18:08:34+09:00",
+          "gap": "0h00m23s"
+        },
+        {
+          "from": "2025-03-26T18:08:34+09:00",
+          "to": "2025-03-26T20:19:53+09:00",
+          "gap": "2h11m19s"
+        },
+        {
+          "from": "2025-03-26T20:19:53+09:00",
+          "to": "2025-03-26T20:31:07+09:00",
+          "gap": "0h11m14s"
+        },
+        {
+          "from": "2025-03-26T20:31:07+09:00",
+          "to": "2025-03-26T21:13:55+09:00",
+          "gap": "0h42m48s"
+        }
+      ]
+    },
+    "청송군": {
+      "county": "청송군",
+      "alerts_issued": 17,
+      "evacuation_orders": 12,
+      "first_alert_kst": "2025-03-22T13:39:21+09:00",
+      "first_alert_text": "도내 산불이 다수 발생중이며 건조한 날씨와 바람으로 산불위험이 매우 높으니, 소각을 금지하여 주시고 산불이 발생하지 않도록 주의하여 주시기 바랍니다.[청송군]",
+      "first_alert_record_id": "231379",
+      "reported_ignition_to_first_alert": {
+        "interval": "[2h13m, 2h15m]",
+        "lower_seconds": 8002.0,
+        "upper_seconds": 8121.0,
+        "lower_h": "2h13m22s",
+        "upper_h": "2h15m21s",
+        "kind": "REPORTED_IGNITION -> FIRST_PUBLIC_WARNING by this authority",
+        "caveat": "NOT a warning lead time. It measures the gap between an authority's own stated ignition time and its first public alert. It says nothing about where the fire was, and therefore nothing about how much time anyone had."
+      },
+      "first_evacuation_order": {
+        "kst": "2025-03-25T16:49:19+09:00",
+        "record_id": "231902",
+        "text": "(대피명령 발령) 산불이 확산됨에 따라 파천면 병부리 주민들은 주왕산관광호텔 파천면 지경리 안덕면 고와리 주민들은 임업인종합연수원으로 대피하시기 바랍니다[청송군]",
+        "reported_ignition_to_first_order": {
+          "interval": "[77h23m, 77h25m]",
+          "lower_h": "77h23m20s",
+          "upper_h": "77h25m19s"
+        },
+        "first_alert_to_first_order": {
+          "interval": "[75h09m, 75h09m]",
+          "exact": "75h09m58s",
+          "note": "both endpoints are second-resolution PRIMARY_OPERATIONAL records, so this interval is exact"
+        }
+      },
+      "order_escalation_gaps": [
+        {
+          "from": "2025-03-25T16:49:19+09:00",
+          "to": "2025-03-25T16:55:48+09:00",
+          "gap": "0h06m29s"
+        },
+        {
+          "from": "2025-03-25T16:55:48+09:00",
+          "to": "2025-03-25T17:29:41+09:00",
+          "gap": "0h33m53s"
+        },
+        {
+          "from": "2025-03-25T17:29:41+09:00",
+          "to": "2025-03-25T17:42:49+09:00",
+          "gap": "0h13m08s"
+        },
+        {
+          "from": "2025-03-25T17:42:49+09:00",
+          "to": "2025-03-26T00:23:32+09:00",
+          "gap": "6h40m43s"
+        },
+        {
+          "from": "2025-03-26T00:23:32+09:00",
+          "to": "2025-03-26T13:50:35+09:00",
+          "gap": "13h27m03s"
+        },
+        {
+          "from": "2025-03-26T13:50:35+09:00",
+          "to": "2025-03-26T14:29:07+09:00",
+          "gap": "0h38m32s"
+        },
+        {
+          "from": "2025-03-26T14:29:07+09:00",
+          "to": "2025-03-26T15:08:30+09:00",
+          "gap": "0h39m23s"
+        },
+        {
+          "from": "2025-03-26T15:08:30+09:00",
+          "to": "2025-03-26T15:54:31+09:00",
+          "gap": "0h46m01s"
+        },
+        {
+          "from": "2025-03-26T15:54:31+09:00",
+          "to": "2025-03-27T15:55:28+09:00",
+          "gap": "24h00m57s"
+        },
+        {
+          "from": "2025-03-27T15:55:28+09:00",
+          "to": "2025-03-27T16:27:19+09:00",
+          "gap": "0h31m51s"
+        },
+        {
+          "from": "2025-03-27T16:27:19+09:00",
+          "to": "2025-03-30T03:34:55+09:00",
+          "gap": "59h07m36s"
+        }
+      ]
+    },
+    "영양군": {
+      "county": "영양군",
+      "alerts_issued": 26,
+      "evacuation_orders": 4,
+      "first_alert_kst": "2025-03-22T16:14:02+09:00",
+      "first_alert_text": "도내 산불이 다수 발생중이며 건조한 날씨와 바람으로 산불위험이 매우 높으니, 소각을 금지하여 주시고 산불이 발생하지 않도록 주의하여 주시기 바랍니다. [영양군]",
+      "first_alert_record_id": "231424",
+      "reported_ignition_to_first_alert": {
+        "interval": "[4h48m, 4h50m]",
+        "lower_seconds": 17283.0,
+        "upper_seconds": 17402.0,
+        "lower_h": "4h48m03s",
+        "upper_h": "4h50m02s",
+        "kind": "REPORTED_IGNITION -> FIRST_PUBLIC_WARNING by this authority",
+        "caveat": "NOT a warning lead time. It measures the gap between an authority's own stated ignition time and its first public alert. It says nothing about where the fire was, and therefore nothing about how much time anyone had."
+      },
+      "first_evacuation_order": {
+        "kst": "2025-03-25T18:18:45+09:00",
+        "record_id": "231968",
+        "text": "(대피명령발령) 현재 석보면 답곡터널 인근 산불 발생하였으니, 인근 주민은 영양군민회관으로 대피바랍니다. [영양군]",
+        "reported_ignition_to_first_order": {
+          "interval": "[78h52m, 78h54m]",
+          "lower_h": "78h52m46s",
+          "upper_h": "78h54m45s"
+        },
+        "first_alert_to_first_order": {
+          "interval": "[74h04m, 74h04m]",
+          "exact": "74h04m43s",
+          "note": "both endpoints are second-resolution PRIMARY_OPERATIONAL records, so this interval is exact"
+        }
+      },
+      "order_escalation_gaps": [
+        {
+          "from": "2025-03-25T18:18:45+09:00",
+          "to": "2025-03-25T18:47:36+09:00",
+          "gap": "0h28m51s"
+        },
+        {
+          "from": "2025-03-25T18:47:36+09:00",
+          "to": "2025-03-25T19:47:06+09:00",
+          "gap": "0h59m30s"
+        },
+        {
+          "from": "2025-03-25T19:47:06+09:00",
+          "to": "2025-03-25T20:15:35+09:00",
+          "gap": "0h28m29s"
+        }
+      ]
+    },
+    "영덕군": {
+      "county": "영덕군",
+      "alerts_issued": 14,
+      "evacuation_orders": 5,
+      "first_alert_kst": "2025-03-24T17:02:00+09:00",
+      "first_alert_text": "고속도로 인근 산불로 서산영덕선 북의성IC~영덕TG 양방향 전면차단 중이오니 국도우회 바랍니다.[영덕군]",
+      "first_alert_record_id": "231681",
+      "reported_ignition_to_first_alert": {
+        "interval": "[53h36m, 53h38m]",
+        "lower_seconds": 192961.0,
+        "upper_seconds": 193080.0,
+        "lower_h": "53h36m01s",
+        "upper_h": "53h38m00s",
+        "kind": "REPORTED_IGNITION -> FIRST_PUBLIC_WARNING by this authority",
+        "caveat": "NOT a warning lead time. It measures the gap between an authority's own stated ignition time and its first public alert. It says nothing about where the fire was, and therefore nothing about how much time anyone had."
+      },
+      "first_evacuation_order": {
+        "kst": "2025-03-25T18:58:23+09:00",
+        "record_id": "231989",
+        "text": "(대피명령 발령) 지품면 옥류리 주민께서는 산불로 도로가 통제되오니, 영덕읍 국민체육센터로 대피해 주시기바랍니다.[영덕군]",
+        "reported_ignition_to_first_order": {
+          "interval": "[79h32m, 79h34m]",
+          "lower_h": "79h32m24s",
+          "upper_h": "79h34m23s"
+        },
+        "first_alert_to_first_order": {
+          "interval": "[25h56m, 25h56m]",
+          "exact": "25h56m23s",
+          "note": "both endpoints are second-resolution PRIMARY_OPERATIONAL records, so this interval is exact"
+        }
+      },
+      "order_escalation_gaps": [
+        {
+          "from": "2025-03-25T18:58:23+09:00",
+          "to": "2025-03-25T19:45:35+09:00",
+          "gap": "0h47m12s"
+        },
+        {
+          "from": "2025-03-25T19:45:35+09:00",
+          "to": "2025-03-25T21:01:00+09:00",
+          "gap": "1h15m25s"
+        },
+        {
+          "from": "2025-03-25T21:01:00+09:00",
+          "to": "2025-03-25T21:49:37+09:00",
+          "gap": "0h48m37s"
+        },
+        {
+          "from": "2025-03-25T21:49:37+09:00",
+          "to": "2025-03-26T00:41:57+09:00",
+          "gap": "2h52m20s"
+        }
+      ]
+    }
+  },
+  "generated": "2026-09-20T02:55:18.674239+00:00"
+}

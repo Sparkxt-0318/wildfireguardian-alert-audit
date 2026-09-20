@@ -128,3 +128,48 @@ class TestGeoRelation:
 
     def test_unknown_geography_is_insufficient(self):
         assert not GeoRelation.UNKNOWN.sufficient_for_lead_time
+
+
+class TestRoadDetectionIsPlaceAware:
+    """로 and 길 are also particles and noun endings.
+
+    The road rule exists to stop a road name leaking its embedded county (X-3),
+    so it fires on stems that embed a place name and stays quiet otherwise.
+    Cases below are all real strings from the harvested alert corpus.
+    """
+
+    def test_weather_particle_is_not_a_road(self):
+        assert extract_from_clause("날씨로 인해").geography.road is None
+
+    def test_verb_ending_is_not_a_road(self):
+        assert extract_from_clause("단계이므로 주의").geography.road is None
+
+    def test_please_evacuate_is_not_a_road(self):
+        assert extract_from_clause("대피하시길 바랍니다").geography.road is None
+
+    def test_time_plus_buro_is_not_a_road(self):
+        assert extract_from_clause("금일 13:44부로 통제").geography.road is None
+
+    def test_facility_plus_directional_particle_is_a_facility(self):
+        g = extract_from_clause("의성실내체육관으로 대피").geography
+        assert g.facility is not None and g.road is None
+
+    def test_a_facility_does_not_leak_its_embedded_county(self):
+        """의성실내체육관 contains 의성 and must not imply 의성군."""
+        assert extract_from_clause("의성실내체육관으로 대피").geography.si_gun is None
+
+    def test_real_road_with_embedded_place_is_still_caught(self):
+        g = extract_from_clause("영덕군 지품면 영덕로 일대").geography
+        assert g.road == "영덕로" and g.si_gun == "영덕군"
+
+    def test_expressway_still_blocks_both_endpoints(self):
+        g = extract_from_clause("서산영덕고속도로 구간").geography
+        assert g.road == "서산영덕고속도로" and g.si_gun is None
+
+    def test_line_name_does_not_leak_a_county(self):
+        """청주영덕선 (Cheongju-Yeongdeok Line) embeds 영덕."""
+        assert extract_from_clause("청주영덕선 통제").geography.si_gun is None
+
+    def test_interchange_name_does_not_leak_a_county(self):
+        """서의성IC embeds 의성; exact token matching keeps it out."""
+        assert extract_from_clause("서의성IC 통제").geography.si_gun is None

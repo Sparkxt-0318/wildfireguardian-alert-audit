@@ -1,0 +1,1201 @@
+{
+  "sampling": "simple random sample without replacement, seed 20250322, drawn from all 311 claims",
+  "n": 50,
+  "population": 311,
+  "sample": [
+    {
+      "record_id": "232043",
+      "send_time_kst": "2025-03-25T22:48:51+09:00",
+      "send_interval_kst": "[2025-03-25T22:48:51+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "금성면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 대피장소 변경합니다. 산불 확산으로 금성면 개일2리 주민과 등산객은 금성면문화센터로 대피하시기 바랍니다. [의성군]",
+      "source_id": "232043",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232043",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T22:48:51+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "232247",
+      "send_time_kst": "2025-03-26T18:09:10+09:00",
+      "send_interval_kst": "[2025-03-26T18:09:10+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "남선면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 강한 바람으로 연기 다량 발생중 남선면 원림1리 마을 주민분들께서는 지금 즉시 반다비체육관 2층으로 대피 바랍니다.[안동시]",
+      "source_id": "232247",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232247",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T18:09:10+0900]",
+      "labels": [
+        "evacuation_order",
+        "reported_ignition"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231781",
+      "send_time_kst": "2025-03-25T14:09:15+09:00",
+      "send_interval_kst": "[2025-03-25T14:09:15+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "길안면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "금일 14시부로 길안면 백자리, 금곡리에 단전(정전)이 되오니 마을주민분들께서는 즉시 길안초등학교로 대피하여 주시기 바랍니다. [안동시]",
+      "source_id": "231781",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231781",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T14:09:15+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232196",
+      "send_time_kst": "2025-03-26T15:57:35+09:00",
+      "send_interval_kst": "[2025-03-26T15:57:35+0900]",
+      "issuing_authority": "청송군",
+      "issuer_county": "청송군",
+      "body_counties": [
+        "청송군"
+      ],
+      "body_eup_myeon": [
+        "주왕산면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 주왕산면 주민들은 파천초등학교강당(파천면 안파로 1357)로 대피하시기 바랍니다. [청송군]",
+      "source_id": "232196",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232196",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T15:57:35+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231919",
+      "send_time_kst": "2025-03-25T17:08:33+09:00",
+      "send_interval_kst": "[2025-03-25T17:08:33+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "옥산면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 산불 확산으로 옥산면 금봉리, 금학리, 오류리 주민과 등산객은 옥산실내체육관으로 대피하시기바랍니다. [의성군]",
+      "source_id": "231919",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231919",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T17:08:33+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231373",
+      "send_time_kst": "2025-03-22T13:07:13+09:00",
+      "send_interval_kst": "[2025-03-22T13:07:13+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "도내 산불이 많이 발생중이며 건조한 날씨와 바람으로 산불위험이 매우 높으니, 소각을 금지하여 주시고 산불이 발생하지 않도록 주의하여 주시기 바랍니다.[안동시]",
+      "source_id": "231373",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231373",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-22T13:07:13+0900]",
+      "labels": [
+        "reported_ignition",
+        "reported_ignition"
+      ],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231692",
+      "send_time_kst": "2025-03-24T18:07:21+09:00",
+      "send_interval_kst": "[2025-03-24T18:07:21+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "길안면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "금일19시경부터 길안면 금곡리, 백자리 일원에 산불로 인해 정전(단전)예정이오니,마을 주민들께서 즉시 길안초, 길안중학교로 대피하여 주시기 바랍니다[안동시]",
+      "source_id": "231692",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231692",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-24T18:07:21+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232285",
+      "send_time_kst": "2025-03-27T09:38:00+09:00",
+      "send_interval_kst": "[2025-03-27T09:38:00+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "산불 발생으로 인해 가압장이 정전(단전)되어 수돗물이 일시적으로 단수됨을 알려드립니다.[안동시]",
+      "source_id": "232285",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232285",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-27T09:38:00+0900]",
+      "labels": [
+        "reported_ignition"
+      ],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231363",
+      "send_time_kst": "2025-03-22T11:05:22+09:00",
+      "send_interval_kst": "[2025-03-22T11:05:22+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "건조한 날씨와 강한 바람으로 산불발생 위험이 높습니다. 산림 가까운 곳에서 소각금지, 입산 시 화기물소지, 흡연 금지 등 산불예방에 협조 바랍니다.[안동시]",
+      "source_id": "231363",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231363",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-22T11:05:22+0900]",
+      "labels": [
+        "reported_ignition"
+      ],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232148",
+      "send_time_kst": "2025-03-26T13:28:48+09:00",
+      "send_interval_kst": "[2025-03-26T13:28:48+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "관내 산불로 인해 인명사고 발생 및 주요시설물 소실 ▲주민들께서는 안전한곳에 머물러 주시고, 또한 오후 강풍이 예상되니 안전에 유의하여 주시기 바랍니다.[안동시]",
+      "source_id": "232148",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232148",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T13:28:48+0900]",
+      "labels": [
+        "reported_ignition"
+      ],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231910",
+      "send_time_kst": "2025-03-25T17:00:03+09:00",
+      "send_interval_kst": "[2025-03-25T17:00:03+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "옥산면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 산불 확산으로 옥산면 감계2리 주민과 등산객은 옥산실내체육관으로 대피하시기바랍니다. [의성군]",
+      "source_id": "231910",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231910",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T17:00:03+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "232023",
+      "send_time_kst": "2025-03-25T20:52:37+09:00",
+      "send_interval_kst": "[2025-03-25T20:52:37+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "관내 산불 확산 중. 국립경국대학교 학생분들은 즉시 안전한 곳으로 대피하시기 바랍니다. [안동시]",
+      "source_id": "232023",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232023",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T20:52:37+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231647",
+      "send_time_kst": "2025-03-24T15:06:28+09:00",
+      "send_interval_kst": "[2025-03-24T15:06:28+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "길안면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "의성산불이 우리지역으로 확산되고 있습니다. 길안면 세점(현하2리)에서 옥산면 지방도 914호선을 통제하오니 우회하여 주시기 바랍니다. [안동시]",
+      "source_id": "231647",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231647",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-24T15:06:28+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232230",
+      "send_time_kst": "2025-03-26T17:18:40+09:00",
+      "send_interval_kst": "[2025-03-26T17:18:40+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "산불로 인해 연기 다량 발생▲야외활동 자제▲외출 시 마스크 착용▲위험 시 안전한 곳 대피▲입산금지▲화기 사용 유의▲운전유의 등 안전에 유의바랍니다.[안동시]",
+      "source_id": "232230",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232230",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T17:18:40+0900]",
+      "labels": [
+        "reported_ignition"
+      ],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231798",
+      "send_time_kst": "2025-03-25T14:51:12+09:00",
+      "send_interval_kst": "[2025-03-25T14:51:12+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "단촌면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 산불 확산으로 단촌면 변방리 주민과 등산객은 단산문화센터로 대피하시기바랍니다. [의성군]",
+      "source_id": "231798",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231798",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T14:51:12+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231724",
+      "send_time_kst": "2025-03-25T09:45:13+09:00",
+      "send_interval_kst": "[2025-03-25T09:45:13+0900]",
+      "issuing_authority": "영덕군",
+      "issuer_county": "영덕군",
+      "body_counties": [
+        "영덕군"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "2025-03-25 09:40 기준 초미세먼지 농도가 매우나쁨 단계이므로 외출 시 마스크 착용, 어린이·노약자는 야외 활동을 자제하세요.[영덕군]",
+      "source_id": "231724",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231724",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T09:45:13+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232036",
+      "send_time_kst": "2025-03-25T22:16:54+09:00",
+      "send_interval_kst": "[2025-03-25T22:16:54+0900]",
+      "issuing_authority": "포항시",
+      "issuer_county": null,
+      "body_counties": [
+        "의성군",
+        "포항시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "의성 산불로 인하여 포항 북구 죽장면, 기북면, 송라면 등 직간접 피해를 입을 수 있으니, 시민들께서는 대피와 피해예방에 만전을 기해 주시기 바랍니다. [포항시]",
+      "source_id": "232036",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232036",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T22:16:54+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231937",
+      "send_time_kst": "2025-03-25T17:34:14+09:00",
+      "send_interval_kst": "[2025-03-25T17:34:14+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "안사면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 대피장소 변경합니다. 산불 확산으로 안사면 안사1리 주민과 등산객은 중하3리경로당으로 대피하시기바랍니다. [의성군]",
+      "source_id": "231937",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231937",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T17:34:14+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231895",
+      "send_time_kst": "2025-03-25T16:41:44+09:00",
+      "send_interval_kst": "[2025-03-25T16:41:44+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "남후면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 현재 강한 바람으로 산불이 급속도로 확산중 남후면 고상리 주민분들께서는 지금 즉시 하아그린파크로 대피하여 주시기 바랍니다.[안동시]",
+      "source_id": "231895",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231895",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T16:41:44+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231968",
+      "send_time_kst": "2025-03-25T18:18:45+09:00",
+      "send_interval_kst": "[2025-03-25T18:18:45+0900]",
+      "issuing_authority": "영양군",
+      "issuer_county": "영양군",
+      "body_counties": [
+        "영양군"
+      ],
+      "body_eup_myeon": [
+        "석보면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령발령) 현재 석보면 답곡터널 인근 산불 발생하였으니, 인근 주민은 영양군민회관으로 대피바랍니다. [영양군]",
+      "source_id": "231968",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231968",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T18:18:45+0900]",
+      "labels": [
+        "evacuation_order",
+        "reported_ignition"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231451",
+      "send_time_kst": "2025-03-22T18:52:01+09:00",
+      "send_interval_kst": "[2025-03-22T18:52:01+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "오늘 17:27 수상동 산51-2 인근 산불 발생. 입산 금지. 인근 주민과 등산객은 안전사고에 주의하세요. [안동시]",
+      "source_id": "231451",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231451",
+      "quantity": "reported_ignition",
+      "time_role": "REPORT_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-22T17:27:00+0900, 2025-03-22T17:27:59+0900]",
+      "stated_time_verbatim": "17:27",
+      "labels": [
+        "reported_ignition"
+      ],
+      "note": "an authority's stated ignition time carried inside an operational alert. It is a REPORT of ignition, not an observation of it, and its resolution is the minute the text used."
+    },
+    {
+      "record_id": "231903",
+      "send_time_kst": "2025-03-25T16:49:56+09:00",
+      "send_interval_kst": "[2025-03-25T16:49:56+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "길안면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "산불 확산으로 인한 914번 지방도 길안면 양곡재 - 청송군 파천면 통행불가, 길안초등학고 폐쇄, 길안중학교로 대피해 주시기 바랍니다.[안동시]",
+      "source_id": "231903",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231903",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T16:49:56+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232045",
+      "send_time_kst": "2025-03-25T23:07:20+09:00",
+      "send_interval_kst": "[2025-03-25T23:07:20+0900]",
+      "issuing_authority": "영양군",
+      "issuer_county": "영양군",
+      "body_counties": [
+        "영양군"
+      ],
+      "body_eup_myeon": [
+        "입암면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "현재 산불관련 입암면-임동면 군도2호선(마령산해로) 산불 접근으로 전면 통제 합니다. [영양군]",
+      "source_id": "232045",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232045",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T23:07:20+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231697",
+      "send_time_kst": "2025-03-24T18:49:56+09:00",
+      "send_interval_kst": "[2025-03-24T18:49:56+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "길안면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "길안면 현하리 산불이 확산되고 있습니다. 마을주민분들께서는 즉시 길안초등학교, 길안중학교로 대피하여 주시기 바랍니다.[안동시]",
+      "source_id": "231697",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231697",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-24T18:49:56+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232245",
+      "send_time_kst": "2025-03-26T18:08:11+09:00",
+      "send_interval_kst": "[2025-03-26T18:08:11+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시",
+        "영양군"
+      ],
+      "body_eup_myeon": [
+        "예안면",
+        "청기면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 영양군 청기면 산불이 우리지역으로 확산중 예안면 주민분들께서는 지금 즉시 길원여고 또는 안동체육관으로 대피 바랍니다.[안동시]",
+      "source_id": "232245",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232245",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T18:08:11+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "232296",
+      "send_time_kst": "2025-03-27T10:29:52+09:00",
+      "send_interval_kst": "[2025-03-27T10:29:52+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "남후면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 남후면 무릉리에서 시내 방면으로 산불 확산 중 시민분들께서는 안전에 유의하여 안전한 곳으로 대피 바랍니다. [안동시]",
+      "source_id": "232296",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232296",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-27T10:29:52+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231802",
+      "send_time_kst": "2025-03-25T14:58:32+09:00",
+      "send_interval_kst": "[2025-03-25T14:58:32+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "안계면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 산불 확산으로 안계면 안정2리 주민과 등산객은 안정2리경로당으로 대피하시기바랍니다. [의성군]",
+      "source_id": "231802",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231802",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T14:58:32+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "232056",
+      "send_time_kst": "2025-03-26T01:06:48+09:00",
+      "send_interval_kst": "[2025-03-26T01:06:48+0900]",
+      "issuing_authority": "영양군",
+      "issuer_county": "영양군",
+      "body_counties": [
+        "영양군"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "산불 확산으로 영양군 전역에 불시 정전이 될 수 있으니, 아파트 계단 이용 및 대피동선 확인 등 사전 준비를 해주시기 바랍니다. [영양군]",
+      "source_id": "232056",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232056",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T01:06:48+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231889",
+      "send_time_kst": "2025-03-25T16:35:17+09:00",
+      "send_interval_kst": "[2025-03-25T16:35:17+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "길안면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 강한 바람으로 인해 산불이 급속도로 확산중입니다. 길안면 마을 주민분들께서는 지금 즉시 길안중학교로 대피하여 주시기 바랍니다.[안동시]",
+      "source_id": "231889",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231889",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T16:35:17+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "232031",
+      "send_time_kst": "2025-03-25T21:48:45+09:00",
+      "send_interval_kst": "[2025-03-25T21:48:45+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "남안동농협주유소(광음리 105-2) 주변 화재(산불 확산) 발생. 인근 주민은 안전에 유의하시기 바랍니다.[안동시]",
+      "source_id": "232031",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232031",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T21:48:45+0900]",
+      "labels": [
+        "reported_ignition"
+      ],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231423",
+      "send_time_kst": "2025-03-22T16:10:17+09:00",
+      "send_interval_kst": "[2025-03-22T16:10:17+0900]",
+      "issuing_authority": "의성군청",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "안평면",
+        "의성읍"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "안평면 괴산리(발화지점) 산불 확산으로 의성읍 후죽1리, 업1리, 원당리 주민들께서는 의성실내체육관으로 대피하시기 바랍니다.[의성군청]",
+      "source_id": "231423",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231423",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-22T16:10:17+0900]",
+      "labels": [
+        "ignition"
+      ],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232039",
+      "send_time_kst": "2025-03-25T22:31:39+09:00",
+      "send_interval_kst": "[2025-03-25T22:31:39+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "금성면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 산불 확산으로 금성면 개일2리 주민과 등산객은 개일2경로당으로 대피하시기바랍니다. [의성군]",
+      "source_id": "232039",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232039",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T22:31:39+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "232201",
+      "send_time_kst": "2025-03-26T16:03:28+09:00",
+      "send_interval_kst": "[2025-03-26T16:03:28+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "길안면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 강한 바람으로 산불 확산중 길안면 주민분들께서는 지금 즉시 길안중학교로 대피하여 주시기 바랍니다.[안동시]",
+      "source_id": "232201",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232201",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T16:03:28+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231443",
+      "send_time_kst": "2025-03-22T17:37:35+09:00",
+      "send_interval_kst": "[2025-03-22T17:37:35+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "안평면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 안평면 괴산리 산 61 산불 확산 의성읍 중리 3리 주민과 등산객은 의성체육관 으로 대피  [의성군]",
+      "source_id": "231443",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231443",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-22T17:37:35+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "232678",
+      "send_time_kst": "2025-03-30T14:06:35+09:00",
+      "send_interval_kst": "[2025-03-30T14:06:35+0900]",
+      "issuing_authority": "영양군",
+      "issuer_county": "영양군",
+      "body_counties": [
+        "영양군"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "금일 헬기 산불진화 작업 중이므로 드론운영을 절대 금지합니다.[영양군]",
+      "source_id": "232678",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232678",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-30T14:06:35+0900]",
+      "labels": [
+        "containment"
+      ],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231369",
+      "send_time_kst": "2025-03-22T12:50:32+09:00",
+      "send_interval_kst": "[2025-03-22T12:50:32+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "안평면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령발령) 11:25 안평면 괴산리 산61 산불 확산. 인근 주민과 등산객은 안전한 곳(안평면 신월리 125 신동마을회관)으로 대피 바람 [의성군]",
+      "source_id": "231369",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231369",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-22T12:50:32+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "232014",
+      "send_time_kst": "2025-03-25T19:56:28+09:00",
+      "send_interval_kst": "[2025-03-25T19:56:28+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 산불 확산중 남후농공단지 종사자 및 주민분들께서는 지금 즉시 안전한 곳으로 대피 바랍니다.[안동시]",
+      "source_id": "232014",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232014",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T19:56:28+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231938",
+      "send_time_kst": "2025-03-25T17:36:37+09:00",
+      "send_interval_kst": "[2025-03-25T17:36:37+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "남선면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "현재 강풍으로 인해 산불이 급격하게 확산 중입니다. 남선면 주민분들께서는 즉시 안전한 곳으로 대피바랍니다. [안동시]",
+      "source_id": "231938",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231938",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T17:36:37+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232187",
+      "send_time_kst": "2025-03-26T15:29:56+09:00",
+      "send_interval_kst": "[2025-03-26T15:29:56+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "관내 강한 바람으로 산불이 확산되오니 시민분들께서는 안전한 곳으로 대피하시고, 창문 닫기, 외출자제, 마스크 착용 등 안전에 각별히 유의 바랍니다.[안동시]",
+      "source_id": "232187",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232187",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T15:29:56+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231897",
+      "send_time_kst": "2025-03-25T16:43:17+09:00",
+      "send_interval_kst": "[2025-03-25T16:43:17+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "단촌면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(긴급대피명령 발령) 집결장소 변경합니다. 산불 확산으로 단촌면 전주민과 등산객은 단촌초등학교로 운동장으로 집결하시기바랍니다. [의성군]",
+      "source_id": "231897",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231897",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T16:43:17+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231536",
+      "send_time_kst": "2025-03-23T13:34:27+09:00",
+      "send_interval_kst": "[2025-03-23T13:34:27+0900]",
+      "issuing_authority": "영양군",
+      "issuer_county": "영양군",
+      "body_counties": [
+        "영양군"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "현재 영양군 초미세먼지 농도가 매우나쁨입니다\r\n외출 시 마스크착용, 호흡기질환자 및 노약자의 야외활동 자제 등 공기질 관리를 철저히 해주시기 바랍니다[영양군]",
+      "source_id": "231536",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231536",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-23T13:34:27+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232261",
+      "send_time_kst": "2025-03-26T22:36:28+09:00",
+      "send_interval_kst": "[2025-03-26T22:36:28+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "남후면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 관내 산불 확산중. 남후면 상아리 및 하아리 주민은 복주여중으로 대피하여 주시기 바랍니다.[안동시]",
+      "source_id": "232261",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232261",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T22:36:28+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231878",
+      "send_time_kst": "2025-03-25T16:26:09+09:00",
+      "send_interval_kst": "[2025-03-25T16:26:09+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "안계면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 산불 확산으로 안계면 도덕2리 만사동 주민과 등산객은 도덕2리 경로당으로 대피하시기 바랍니다. [의성군]",
+      "source_id": "231878",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231878",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T16:26:09+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231642",
+      "send_time_kst": "2025-03-24T14:47:29+09:00",
+      "send_interval_kst": "[2025-03-24T14:47:29+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "옥산면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 정정합니다. 옥산면 입암1리, 신계1리, 신계2리 주민과 등산객은 옥산면실내체육관으로 대피하시기바랍니다. [의성군]",
+      "source_id": "231642",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231642",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-24T14:47:29+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231911",
+      "send_time_kst": "2025-03-25T17:00:13+09:00",
+      "send_interval_kst": "[2025-03-25T17:00:13+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "관내 산불이 우리 시 전역으로 확산되고 있으니 전 시민은 안전한 곳으로 대피하시고, 창문 닫기, 외출자제, 마스크 착용 등 안전에 각별히 유의 바랍니다.[안동시]",
+      "source_id": "231911",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231911",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T17:00:13+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "231893",
+      "send_time_kst": "2025-03-25T16:39:57+09:00",
+      "send_interval_kst": "[2025-03-25T16:39:57+0900]",
+      "issuing_authority": "의성군",
+      "issuer_county": "의성군",
+      "body_counties": [
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "신평면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(전주민 대피명령) 신평면 교안1·2·4리 주민은 안평초등학교 신평분교장으로 대피, 중율2리 주민은 밤실 경로당으로 대피바랍니다.  [의성군]",
+      "source_id": "231893",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231893",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T16:39:57+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231983",
+      "send_time_kst": "2025-03-25T18:48:18+09:00",
+      "send_interval_kst": "[2025-03-25T18:48:18+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [
+        "임동면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "(대피명령 발령) 강풍으로 인해 산불이 급격하게 확산되고 있습니다. 임동면 마을 주민분들께서는 지금 즉시 안전한 곳으로 대피 바랍니다.[안동시]",
+      "source_id": "231983",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231983",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T18:48:18+0900]",
+      "labels": [
+        "evacuation_order"
+      ],
+      "is_evacuation_order": true
+    },
+    {
+      "record_id": "231830",
+      "send_time_kst": "2025-03-25T15:31:32+09:00",
+      "send_interval_kst": "[2025-03-25T15:31:32+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시",
+        "의성군"
+      ],
+      "body_eup_myeon": [
+        "풍천면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "의성 산불이 풍천면으로 확산중 어담1리, 어담2리, 금계리 마을 주민들께서는 지금 즉시 신성초등학교로 대피하여 주시기 바랍니다. [안동시]",
+      "source_id": "231830",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=231830",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T15:31:32+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232076",
+      "send_time_kst": "2025-03-26T09:05:50+09:00",
+      "send_interval_kst": "[2025-03-26T09:05:50+0900]",
+      "issuing_authority": "안동시",
+      "issuer_county": "안동시",
+      "body_counties": [
+        "안동시"
+      ],
+      "body_eup_myeon": [],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "현재 산불 진화 중. 대피소에 대피하신 분들께서는 대피소에 머물러 주시고, 귀가를 자제하여 주시기 바랍니다. [안동시]",
+      "source_id": "232076",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232076",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-26T09:05:50+0900]",
+      "labels": [
+        "containment"
+      ],
+      "is_evacuation_order": false
+    },
+    {
+      "record_id": "232024",
+      "send_time_kst": "2025-03-25T20:54:47+09:00",
+      "send_interval_kst": "[2025-03-25T20:54:47+0900]",
+      "issuing_authority": "영양군",
+      "issuer_county": "영양군",
+      "body_counties": [
+        "영양군"
+      ],
+      "body_eup_myeon": [
+        "영양읍",
+        "입암면"
+      ],
+      "roads_mentioned_not_localities": [],
+      "raw_text": "현재 산불 입암면 노달리로 확산 중. 영양읍 전곡리, 현리 주민분들은 영양초등학교로 대피하여 주시기 바랍니다.[영양군]",
+      "source_id": "232024",
+      "provenance": "https://www.safetydata.go.kr/disaster-data/disasterNotificationDetail?sn=232024",
+      "quantity": "first_public_warning",
+      "time_role": "ALERT_SEND_TIME",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "interval_kst": "[2025-03-25T20:54:47+0900]",
+      "labels": [],
+      "is_evacuation_order": false
+    }
+  ]
+}

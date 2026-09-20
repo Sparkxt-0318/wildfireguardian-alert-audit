@@ -79,18 +79,30 @@ EUP_MYEON_PARENT: Final[dict[str, tuple[str, ...]]] = {
     k: tuple(v) for k, v in _PARENTS.items()
 }
 
-#: Suffixes marking a token as a ROAD. A road name is not a locality (X-3).
-ROAD_SUFFIXES: Final[tuple[str, ...]] = (
+#: Suffixes that mark a token as a ROAD on their own. Unambiguous: no ordinary
+#: Korean noun-plus-particle construction ends this way.
+ROAD_SUFFIXES_STRONG: Final[tuple[str, ...]] = (
     "고속도로", "고속국도", "자동차전용도로", "순환도로", "우회도로",
-    "국도", "지방도", "산업로", "대로", "로", "길",
+    "국도", "지방도", "산업로", "대로",
 )
+
+#: Suffixes that mark a road only in the presence of a place name. 로 and 길 are
+#: also the directional particle and a common noun ending, so "날씨로" (because
+#: of the weather) and "대피하시길" (please evacuate) end this way without being
+#: roads. See ``geography._classify_token`` for why that is handled by requiring
+#: a place name in the stem rather than by a longer stop-list.
+ROAD_SUFFIXES_WEAK: Final[tuple[str, ...]] = ("로", "길")
+
+#: Retained for callers that want every road-ish ending.
+ROAD_SUFFIXES: Final[tuple[str, ...]] = ROAD_SUFFIXES_STRONG + ROAD_SUFFIXES_WEAK
 
 #: Suffixes marking a token as a FACILITY / structure. Also not a locality.
 FACILITY_SUFFIXES: Final[tuple[str, ...]] = (
     "나들목", "분기점", "휴게소", "톨게이트", "영업소", "터널", "대교", "육교",
-    "초등학교", "중학교", "고등학교", "대학교", "병원", "보건소", "마을회관",
-    "경로당", "체육관", "복지관", "주민센터", "행정복지센터", "저수지", "댐",
-    "발전소", "변전소", "요양원", "요양병원", "사찰", "공원", "역", "터미널",
+    "초등학교", "중학교", "고등학교", "대학교", "학교", "병원", "보건소",
+    "마을회관", "회관", "경로당", "체육관", "체육센터", "복지관", "주민센터",
+    "행정복지센터", "센터", "면사무소", "읍사무소", "사무소", "저수지", "댐", "발전소", "변전소", "요양원",
+    "요양병원", "사찰", "공원", "역", "터미널",
 )
 
 #: Suffixes marking a NATURAL FEATURE. A mountain name does not imply a county

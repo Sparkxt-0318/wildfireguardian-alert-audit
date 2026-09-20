@@ -134,14 +134,55 @@ def _base_form(tok: str) -> str:
     return base
 
 
+def _contains_place_name(stem: str) -> bool:
+    """Does this stem embed a gazetteer place name that could leak (X-3)?"""
+    for canonical, aliases in gz.SI_GUN.items():
+        if canonical in stem or any(a in stem for a in aliases):
+            return True
+    return any(name in stem for name in gz.EUP_MYEON_PARENT)
+
+
+#: 부로 ("as of"), 으로/로 after a time expression - never a road name.
+_TIME_TAIL = re.compile(r"(\d+\s*(시|분|일|월|년)|부)로$")
+
+
 def _classify_token(tok: str) -> tuple[str, str] | None:
     """Return ``(kind, reason)`` if ``tok`` is a non-locality compound.
 
     Checked longest-suffix-first so that 고속도로 wins over its own 로 tail.
+
+    Two constructions are screened out before the road rules, because both end
+    in 로 without naming a road: a time expression plus 부로 ("as of 14:00"),
+    and a facility plus the directional 로 ("to the sports centre"). Both are
+    already excluded from locality inference, so this only keeps the recorded
+    ``road`` field honest - but a road field full of timestamps would make the
+    manual verification pass unreadable.
     """
-    for suf in sorted(gz.ROAD_SUFFIXES, key=len, reverse=True):
+    if _TIME_TAIL.search(tok):
+        return ("other", "time expression with the particle 로, not a road")
+
+    for suf in sorted(gz.FACILITY_SUFFIXES, key=len, reverse=True):
+        for particle in ("으로", "로", ""):
+            if tok.endswith(suf + particle) and len(tok) > len(suf) + len(particle) - 1:
+                return ("facility", f"facility suffix {suf!r}")
+
+    for suf in sorted(gz.ROAD_SUFFIXES_STRONG, key=len, reverse=True):
         if tok.endswith(suf) and len(tok) > len(suf):
-            return ("road", f"token ends in road suffix {suf!r}")
+            return ("road", f"token ends in unambiguous road suffix {suf!r}")
+
+    # 로 and 길 only indicate a road when a place name is embedded - which is
+    # precisely the case X-3 exists to catch. A token like 날씨로 carries no
+    # place name and so cannot leak one, whatever it is.
+    for suf in sorted(gz.ROAD_SUFFIXES_WEAK, key=len, reverse=True):
+        if tok.endswith(suf) and len(tok) > len(suf) + 1:
+            stem = tok[: -len(suf)]
+            if _contains_place_name(stem):
+                return (
+                    "road",
+                    f"road suffix {suf!r} on a stem containing a place name "
+                    f"- excluded from locality inference (X-3)",
+                )
+            return ("other", f"ends in {suf!r} but embeds no place name")
     for suf in sorted(gz.FACILITY_SUFFIXES, key=len, reverse=True):
         if tok.endswith(suf) and len(tok) > len(suf):
             return ("facility", f"token ends in facility suffix {suf!r}")
@@ -180,6 +221,8 @@ def extract_from_clause(clause: str) -> ClauseResult:
                 SpanMatch(tok, s, e, kind, accepted=False,
                           reason=f"not a locality: {reason}")
             )
+            if kind == "other":
+                continue
             if kind == "road" and road is None:
                 road = tok
             elif kind == "facility" and facility is None:

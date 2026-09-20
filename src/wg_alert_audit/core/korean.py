@@ -151,6 +151,27 @@ def parse(text: str) -> ParseResult:
     return ParseResult(text=text, labels=out)
 
 
+#: Imperative evacuation instructions. These are NOT formally-declared
+#: 대피명령, but an alert saying "주민들께서는 즉시 ...으로 대피하시기 바랍니다"
+#: plainly directs people to leave. Counting them as orders would overstate the
+#: formal record; ignoring them entirely would understate what was communicated.
+#: They are therefore a separate, reported category.
+_DIRECTIVE_PATTERNS: Final[tuple[re.Pattern[str], ...]] = (
+    re.compile(r"대피\s*(하시기|하시길|바랍니다|바람|하십시오|하세요|하시어|해\s*주)"),
+    re.compile(r"(으로|로)\s*대피"),
+    re.compile(r"대피\s*(하여|해)\s*주시기"),
+)
+
+
+def is_evacuation_directive(text: str) -> bool:
+    """True when the text instructs people to evacuate, order or not.
+
+    A formal 대피명령 is also a directive, so this is a superset. Callers
+    report the two counts separately (see ``reports/LEAD_TIME_RESULTS.md``).
+    """
+    return any(p.search(text) for p in _DIRECTIVE_PATTERNS)
+
+
 #: Times printed in Korean prose: "오후 3시 30분", "15시30분", "15:30".
 _TIME_PATTERNS: Final[tuple[re.Pattern[str], ...]] = (
     re.compile(r"(오전|오후)\s*(\d{1,2})\s*시\s*(\d{1,2})?\s*분?"),
