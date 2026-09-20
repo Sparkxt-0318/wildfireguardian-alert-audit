@@ -1,0 +1,142 @@
+{
+  "note": "Discovering a stronger source adds an edge; it never deletes the weaker node. Every claim keeps the chain that reached it.",
+  "nodes": [
+    {
+      "id": "WIKI-KO",
+      "label": "ko.wikipedia 2025년 의성-안동 산불",
+      "evidence_class": "TERTIARY",
+      "role": "discovery aid only; never a terminal source",
+      "url": "https://ko.wikipedia.org/wiki/2025년_의성-안동_산불"
+    },
+    {
+      "id": "NEWS-AGG",
+      "label": "Korean press coverage of the Uiseong ignition",
+      "evidence_class": "NEWS_REPORT",
+      "role": "reports an ignition time; cannot be the record of one"
+    },
+    {
+      "id": "MOIS-PR-0322",
+      "label": "MOIS 보도자료, 2025-03-22, 「…의성군 산불 관련 긴급지시」",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "role": "operational-at-the-time; states 11시 24분경",
+      "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156680269",
+      "states": "11시 24분경"
+    },
+    {
+      "id": "CBS-UISEONG-151622",
+      "label": "의성군청 emergency alert, sent 2025/03/22 15:16:22",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "role": "the operational alert itself; states 11:25",
+      "states": "11:25"
+    },
+    {
+      "id": "CBS-ANDONG-151800",
+      "label": "안동시 emergency alert, sent 2025/03/22 15:18:00",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "role": "the operational alert itself; states 11:24",
+      "states": "11:24"
+    },
+    {
+      "id": "MOIS-JUNGDAEBON-8",
+      "label": "MOIS 중대본 8차 per-fire status table, 2025-03-29",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "role": "assigns 3.22 11:25 to all five Gyeongbuk counties",
+      "url": "https://www.korea.kr/briefing/pressReleaseView.do?newsId=156681469",
+      "states": "3.22(토) 11:25"
+    },
+    {
+      "id": "DERIVED-IGNITION-HULL",
+      "label": "reported ignition = [11:24:00, 11:25:59] KST",
+      "evidence_class": "DERIVED",
+      "role": "convex hull of the two conflicting primary readings; a weakening"
+    },
+    {
+      "id": "SAFEKOREA-UI",
+      "label": "국민안전24 재난문자 search UI",
+      "evidence_class": "TERTIARY",
+      "role": "retrieval surface; returns 전체 0 건 for the target window"
+    },
+    {
+      "id": "DSSP-API",
+      "label": "safetydata.go.kr DSSP-IF-00247 (alert API)",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "role": "authoritative record-level source; API_KEY_REQUIRED"
+    },
+    {
+      "id": "SAFETYDATA-ARCHIVE",
+      "label": "safetydata.go.kr /disaster-data/disasterNotification",
+      "evidence_class": "PRIMARY_OPERATIONAL",
+      "role": "public archive of the same records; RETRIEVED, 1,688 records"
+    },
+    {
+      "id": "ANDONG-PORTAL",
+      "label": "안동시 대형산불 종합안내",
+      "evidence_class": "OFFICIAL_RETROSPECTIVE",
+      "role": "retrospective; states 2025. 3. 24.(월) 17:02",
+      "url": "https://www.andong.go.kr/portal/contents.do?mId=0616010000",
+      "states": "2025. 3. 24.(월) 17:02"
+    }
+  ],
+  "edges": [
+    {
+      "from": "WIKI-KO",
+      "to": "NEWS-AGG",
+      "type": "CITES",
+      "note": "tertiary used as a discovery aid, then left behind"
+    },
+    {
+      "from": "NEWS-AGG",
+      "to": "MOIS-PR-0322",
+      "type": "QUOTES",
+      "note": "press quotes the ministry; the quote does not become the record"
+    },
+    {
+      "from": "MOIS-PR-0322",
+      "to": "CBS-UISEONG-151622",
+      "type": "CONTRADICTS",
+      "note": "11시 24분경 vs 11:25 — both primary, both retained (C-01)"
+    },
+    {
+      "from": "CBS-UISEONG-151622",
+      "to": "CBS-ANDONG-151800",
+      "type": "CONTRADICTS",
+      "note": "two counties, 98 seconds apart, disagree by one minute"
+    },
+    {
+      "from": "CBS-UISEONG-151622",
+      "to": "MOIS-JUNGDAEBON-8",
+      "type": "CORROBORATES",
+      "note": "the central status table carries the same 11:25"
+    },
+    {
+      "from": "CBS-UISEONG-151622",
+      "to": "DERIVED-IGNITION-HULL",
+      "type": "REPRODUCES",
+      "note": "contributes its reading to the hull"
+    },
+    {
+      "from": "CBS-ANDONG-151800",
+      "to": "DERIVED-IGNITION-HULL",
+      "type": "REPRODUCES",
+      "note": "contributes its reading to the hull"
+    },
+    {
+      "from": "SAFEKOREA-UI",
+      "to": "DSSP-API",
+      "type": "SUPERSEDES",
+      "note": "the UI's retention boundary makes it useless here; the API is authoritative"
+    },
+    {
+      "from": "DSSP-API",
+      "to": "SAFETYDATA-ARCHIVE",
+      "type": "REPRODUCES",
+      "note": "the public archive publishes the same operational records, ungated"
+    },
+    {
+      "from": "MOIS-JUNGDAEBON-8",
+      "to": "ANDONG-PORTAL",
+      "type": "CONTRADICTS",
+      "note": "3.22 11:25 vs 3.24 17:02 for Andong — different quantities (C-02)"
+    }
+  ]
+}

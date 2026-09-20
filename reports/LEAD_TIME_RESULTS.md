@@ -41,10 +41,28 @@ measures. None of them is a warning lead time.
 
 | Term | Meaning |
 |---|---|
-| **reported ignition** | `[2025-03-22T11:24:00+09:00, 2025-03-22T11:25:59+09:00]` — the hull of two conflicting primary records (C-01). Not averaged. |
+| **reported ignition** | `[2025-03-22T11:24:00+09:00, 2025-03-22T11:25:59+09:00]` — evidence class **`DERIVED`**; see the note below. |
 | **formal evacuation order** | the alert text declares 대피명령 / 대피령 / 긴급대피 |
 | **evacuation directive** | the alert instructs people to evacuate, whether or not an order was formally declared. A superset of the above. |
 | **first alert about this fire** | earliest alert from that authority that mentions 산불 **and** was sent at or after the earliest reported ignition. The time floor matters: without it, each county's "first alert" is a pre-ignition dryness warning and the interval comes out negative. |
+
+#### Why the reported-ignition interval is `DERIVED`, and why a hull is allowed
+
+Two primary records disagree: one says 11:24, one says 11:25 (C-01). At minute
+resolution those are `[11:24:00, 11:24:59]` and `[11:25:00, 11:25:59]`.
+
+`docs/TIME_ONTOLOGY.md` forbids averaging them into 11:24:30, and permits a
+combination only as **an explicitly labelled `DERIVED` analysis with a stated
+justification**. This is that label and that justification.
+
+The combination used is the **convex hull**: the narrowest interval containing
+both readings. It is admissible precisely because it is a *weakening*. It
+asserts strictly less than either source alone and rules out no possibility
+either source allows. An average would assert more than any source does — a
+precision to the second that no record anywhere supplies.
+
+Consequence: every interval in the tables below inherits `DERIVED` status on
+its ignition side. The alert side remains `PRIMARY_OPERATIONAL` and exact.
 
 ### Result: reported ignition → first public warning
 
