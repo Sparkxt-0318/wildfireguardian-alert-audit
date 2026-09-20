@@ -243,7 +243,12 @@ def firms_acq_to_interval(acq_date: str, acq_time: str) -> TimeInterval:
     zero-stripped, e.g. ``"310"`` meaning 03:10). Reading these as KST is
     FM-02 and shifts every detection by nine hours, frequently across midnight.
     """
-    padded = acq_time.strip().zfill(4)
+    raw = acq_time.strip()
+    if not raw or not raw.isdigit():
+        # "".zfill(4) is "0000", so a blank field silently became midnight UTC
+        # in the one function whose whole purpose is timezone correctness.
+        raise IntervalError(f"FIRMS acq_time is blank or non-numeric: {acq_time!r}")
+    padded = raw.zfill(4)
     hh, mm = int(padded[:2]), int(padded[2:])
     if not (0 <= hh <= 23 and 0 <= mm <= 59):
         raise IntervalError(f"out-of-range FIRMS acq_time: {acq_time!r}")

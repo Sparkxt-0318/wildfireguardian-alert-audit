@@ -118,6 +118,26 @@ def probe_slot(observed_utc: datetime, area: str = "KO") -> SlotAvailability:
             ),
         )
 
+    if resp.ok and "image/png" not in (resp.content_type or "").lower():
+        # COVERAGE.md states the acceptance test as "HTTP 200, image/png,
+        # > 4 KiB", but the code only rejected small text/html. Three slots
+        # served large text/html bodies and were counted as products.
+        return SlotAvailability(
+            observed_utc=observed_utc,
+            area=area,
+            url=url,
+            available=False,
+            access_status=AccessStatus.UNKNOWN,
+            byte_length=len(resp.body),
+            content_type=resp.content_type,
+            note=(
+                f"HTTP 200 but content-type is {resp.content_type!r}, not "
+                "image/png. Size is inside the product distribution, so this is "
+                "probably a product served with a wrong type - but it is not "
+                "verifiable, so it is UNKNOWN rather than RETRIEVED."
+            ),
+        )
+
     if resp.ok:
         import hashlib
 

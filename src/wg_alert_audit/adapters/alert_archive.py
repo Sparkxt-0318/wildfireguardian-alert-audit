@@ -161,22 +161,43 @@ def harvest(
             total = total_records(body)
         rows = parse_listing(body, url)
         if not rows:
-            return HarvestResult(
-                alerts, page - 1, AccessStatus.RETRIEVED,
-                f"harvest complete: page {page} returned no rows", total,
-            )
+            return _complete(alerts, page - 1, total, f"page {page} returned no rows")
         fresh = [a for a in rows if a.sn not in seen]
         if not fresh:
-            return HarvestResult(
-                alerts, page - 1, AccessStatus.RETRIEVED,
-                f"harvest complete: page {page} repeated earlier rows", total,
-            )
+            return _complete(alerts, page - 1, total, f"page {page} repeated earlier rows")
         for a in fresh:
             seen.add(a.sn)
         alerts.extend(fresh)
         page += 1
 
+    # Hitting the page limit previously returned RETRIEVED, making a truncated
+    # harvest indistinguishable from a complete one - and since the listing is
+    # newest-first, what a truncated day loses is exactly its earliest records.
     return HarvestResult(
-        alerts, page - 1, AccessStatus.RETRIEVED,
-        f"stopped at the {max_pages}-page safety limit", total,
+        alerts, page - 1, AccessStatus.UNKNOWN,
+        f"TRUNCATED: stopped at the {max_pages}-page safety limit with "
+        f"{len(alerts)} records; the listing is newest-first, so the earliest "
+        "records of this window may be missing",
+        total,
+    )
+
+
+def _complete(
+    alerts: list[ArchivedAlert], pages: int, total: int | None, why: str
+) -> HarvestResult:
+    """Finish a harvest, checking the collected count against the site's own.
+
+    The listing prints 「전체 N 건」. Parsing it and never comparing it to what
+    was collected meant a silent shortfall looked like a complete harvest.
+    """
+    if total is not None and len(alerts) != total:
+        return HarvestResult(
+            alerts, pages, AccessStatus.UNKNOWN,
+            f"INCOMPLETE: collected {len(alerts)} records but the listing "
+            f"reports 전체 {total} 건 ({why})",
+            total,
+        )
+    return HarvestResult(
+        alerts, pages, AccessStatus.RETRIEVED,
+        f"harvest complete: {len(alerts)} records ({why})", total,
     )

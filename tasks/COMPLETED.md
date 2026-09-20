@@ -45,3 +45,27 @@
   three false absences avoided.
 - Computed the alert-timing intervals the evidence supports, and established
   that no warning lead time is defensible for any locality.
+
+## Phase 4 — verification and adversarial audit — 2026-09-20
+
+- **Round 1 manual verification** (seed 20250322, n=50): 32.0 % discrepancy,
+  95 % CI [20.8 %, 45.8 %]. Four defect clusters identified and fixed, with 23
+  regression tests built from verbatim corpus strings.
+- **Adversarial audit**: found that four of five rows in the headline table
+  selected the wrong record, and that the published precision was wrong by a
+  factor of sixty. Both corrected; corrections documented in
+  `reports/LEAD_TIME_RESULTS.md` rather than quietly patched.
+- **Round 2 manual verification** (seed 20260920, n=50, fresh draw): 34.0 %,
+  95 % CI [22.4 %, 47.8 %] — statistically indistinguishable from round 1.
+  Reported as such rather than as an improvement.
+- Quantity vocabulary un-collapsed from 2 values to 6; the superlative
+  `first_public_warning` now holds at most once per county.
+- Cross-province place-name collision fixed (무주군 부남면 → 청송군).
+- Integration suite added: every committed event round-trips through `Claim`,
+  so the protocol's guards run on real records rather than only in unit tests.
+
+## Phase 5 — reports — 2026-09-20
+
+All eight reports generated, plus `visualizations/timeline.svg` and
+`evidence_map.svg`. `reports/FRESH_REBUILD_VERDICT.md` answers the brief's
+thirteen questions.

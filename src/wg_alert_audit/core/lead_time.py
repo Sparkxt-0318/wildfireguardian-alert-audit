@@ -18,6 +18,7 @@ carried on the result and printed next to every number.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from enum import Enum
 
 from .geography import relate
@@ -201,7 +202,5 @@ def bound_from_non_detection(
     if assumption is None or not assumption.licenses_inference:
         return None
     return TimeInterval.after(
-        __import__("datetime").datetime.fromtimestamp(
-            non_detection_time.upper, __import__("datetime").timezone.utc
-        )
+        datetime.fromtimestamp(non_detection_time.upper, timezone.utc)
     )
