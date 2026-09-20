@@ -7,6 +7,7 @@ Every request produces an :class:`Attempt`, which the classifier turns into an
 from __future__ import annotations
 
 import socket
+import time
 import urllib.error
 import urllib.request
 from dataclasses import dataclass
@@ -15,9 +16,14 @@ from ..core.access import Attempt, classify
 from ..core.credentials import redact
 from ..core.model import AccessStatus
 
-USER_AGENT = (
-    "wg-alert-audit/2.0 (historical wildfire evidence audit; contact via repository)"
-)
+#: Several Korean government hosts reset a meaningful fraction of connections
+#: regardless of client or User-Agent - measured at roughly one request in four
+#: against safetydata.go.kr. A single failed attempt therefore carries almost no
+#: information, which is exactly why :func:`fetch` retries before reporting.
+USER_AGENT = "Mozilla/5.0 (compatible; wg-alert-audit/2.0; wildfire evidence audit)"
+
+#: Backoff schedule, in seconds, between transport retries.
+RETRY_BACKOFF: tuple[float, ...] = (1.0, 2.0, 4.0, 8.0)
 
 
 @dataclass(slots=True)
@@ -45,8 +51,38 @@ def fetch(
     timeout: float = 45.0,
     query_was_valid: bool = False,
     max_body: int = 8_000_000,
+    retries: int = len(RETRY_BACKOFF),
 ) -> Response:
-    """Fetch a URL and classify the outcome honestly."""
+    """Fetch a URL and classify the outcome honestly.
+
+    Transport failures are retried with backoff before being reported, because
+    on these hosts a lone connection reset is noise rather than a finding.
+    HTTP-level outcomes are **not** retried: a 401 or a 404 is an answer from
+    the application, and asking again does not make it more true.
+    """
+    last: Response | None = None
+    for i in range(retries + 1):
+        resp = _fetch_once(url, source_id, timeout, query_was_valid, max_body)
+        if resp.attempt.transport_error is None:
+            if i:
+                resp.reason += f" (succeeded on attempt {i + 1})"
+            return resp
+        last = resp
+        if i < retries:
+            time.sleep(RETRY_BACKOFF[min(i, len(RETRY_BACKOFF) - 1)])
+
+    assert last is not None
+    last.reason += f" (after {retries + 1} attempts)"
+    return last
+
+
+def _fetch_once(
+    url: str,
+    source_id: str,
+    timeout: float,
+    query_was_valid: bool,
+    max_body: int,
+) -> Response:
     req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
     attempt = Attempt(
         source_id=source_id, url=url, query_was_valid=query_was_valid
